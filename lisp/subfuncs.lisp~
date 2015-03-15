@@ -1,0 +1,7 @@
+(defun single? (lst)
+  (
+    and 
+      (consp lst) 
+      (null (cdr lst))
+  )
+)

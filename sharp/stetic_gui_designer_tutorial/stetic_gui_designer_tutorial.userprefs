@@ -1,0 +1,14 @@
+﻿<Properties>
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug|x86" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="stetic_gui_designer_tutorial/MainWindow.cs">
+    <Files>
+      <File FileName="stetic_gui_designer_tutorial/Program.cs" Line="1" Column="1" />
+      <File FileName="stetic_gui_designer_tutorial/Consts.cs" Line="5" Column="45" />
+      <File FileName="stetic_gui_designer_tutorial/MainWindow.cs" Line="5" Column="79" />
+    </Files>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+</Properties>

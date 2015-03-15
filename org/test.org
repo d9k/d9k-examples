@@ -1,0 +1,86 @@
+* First tutorial
+
+#+PROPERTY: header-args :padline yes :comments both
+#+PROPERTY: header-args :padline yes :comments both
+
+http://orgmode.org/worg/org-faq.html#updating-org
+
+http://orgmode.org/worg/org-tutorials/orgtutorial_dto.html
+
+** Tasks
+*** DONE Start new org file for tutorial
+   CLOSED: [2014-10-27 Mon 03:41]
+*** TODO Outline document
+   Annotations
+*** TODO Write introduction
+   SCHEDULED: <2014-11-05 Wed>
+   
+*** Levels-test - Third level
+**** Fourth level
+***** Fifth level
+****** Sixth level
+******* Seventh level
+******** Eights level
+
+** Introduction
+
+Lorem ipsum dolor...
+
+*** Obtaining org-mode
+[[http://orgmode.org/worg/org-tutorials/orgtutorial_dto.html][this tutorial]]
+test file link:
+[[file:/media/d9k/Media/cr/tx/textbook][azaza]]
+
+* Second tutorial 						   :test:tag:
+  https://github.com/novoid/org-mode-workshop/blob/master/featureshow/org-mode-teaser.org
+
+task list
+
+  - [X] First task (M-S-RET)
+    - [X] Subtask1
+    - [X] Subtask2
+  - +[ ] Denied task+
+  - [ ] 
+
+  - test list item
+  - test list item 2 (M-RET)
+
+** TODO  http://orgmode.org/worg/org-contrib/babel/intro.html
+At the bottom of page, literate programming
+
+#+BEGIN_SRC lisp :tangle test.lisp :padline yes :comments both
+      (setq a 5)
+#+END_SRC
+
+#+BEGIN_SRC python :tangle test.py :padline yes :comments both
+  print 'test'
+#+END_SRC
+
+#+BEGIN_SRC python :tangle test.py :padline yes :comments both
+  print 5+6
+#+END_SRC
+
+
+| Name  | Phone | Age |
+|-------+-------+-----|
+| Peter |  1234 |  17 |
+|       |       |     |
+|       |       |     |
+
+
+|-------+-------+-------|
+| Test1 | Test2 | Test3 |
+|-------+-------+-------|
+|   324 |    45 |    54 |
+|       |   343 |       |
+|       |     4 |     1 |
+|-------+-------+-------|
+
+[[./test.png]]
+
+* Some other stuff
+
+Including other file ([[./test-sub.html][test-sub]]):
+
+#+INCLUDE: "./test-sub.org"
+* http:/orgmode.org/worg/org-contrib/babel/intro.html

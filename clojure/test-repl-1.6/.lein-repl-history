@@ -1,0 +1,21 @@
+lein exec
+exit
+(for [i (range 1 6)] (print i))
+(for [i (range 1 6)] i)
+(for [i (range 1 6)] (print i))
+(for [i (range 1 6)] (print i " "))
+(dorun (map #(println "hi" %) ["mum" "dad" "sister"]))
+(let [r range 1e9)] [(first r) (last r)]])
+(let [r range 1e9)] [(first r) (last r)])
+(let [r (range 1e9)] [(first r) (last r)])
+(let [r (range 1e6)] [(first r) (last r)])
+(let [r (range 1e6)] [(last r) (first r)])
+(qsort [1 6 3 0])
+(defn slope2 [p1 p2]
+  {:pre [(not= p1 p2) (vector? p1) (vector? p2)]
+   :post [(float? %)]}
+  (float (/ (- (p2 1) (p1 1))
+   (- (p2 0) (p1 0)))))
+(slope2 [10 10] [10 10])
+(clojure-version)
+exit

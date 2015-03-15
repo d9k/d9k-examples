@@ -1,0 +1,8 @@
+regexp:^bkuppr
+regexp:^drl
+regexp:^go
+glob:*.exe
+glob:*.mdb
+glob:*Infrastructure.dll
+glob:sharp/*/packages/*
+glob:sharp/**/bin/**

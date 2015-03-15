@@ -1,0 +1,12 @@
+#+PROPERTY: header-args :padline yes
+#+PROPERTY: header-args :comments both
+
+#+NAME: lisp_test
+#+BEGIN_SRC lisp :tangle test2.lisp :padline yes :comments link
+      (setq a 6)
+#+END_SRC
+
+#+NAME: python_test
+#+BEGIN_SRC python :tangle test2.py :padline yes :comments link
+      print 42
+#+END_SRC
