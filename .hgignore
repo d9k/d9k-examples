@@ -1,6 +1,9 @@
 regexp:^bkuppr
 regexp:^drl
 regexp:^go
+regexp:^nodejs/
+
+# visual studio junk filter
 glob:*.exe
 glob:*.mdb
 glob:*Infrastructure.dll
