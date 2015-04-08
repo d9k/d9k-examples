@@ -1,6 +1,7 @@
 ;; p.184 Joy of Clojure
 
 (ns joy.udp
+  ;; UDP-Universal Design Pattern
   (:refer-clojure :exclude [get]))
 
 (defn beget [obj proto] (assoc obj ::prototype proto))

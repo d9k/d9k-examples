@@ -2,6 +2,7 @@ regexp:^bkuppr
 regexp:^drl
 regexp:^go
 regexp:^nodejs/
+regexp:^cljs/quickstart/cljs\.jar
 
 # visual studio junk filter
 glob:*.exe
