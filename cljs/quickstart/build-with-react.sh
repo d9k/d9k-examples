@@ -1,0 +1,1 @@
+java -cp cljs.jar:src:react-0.12.2-8.jar clojure.main build2.clj

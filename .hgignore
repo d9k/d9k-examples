@@ -10,3 +10,8 @@ glob:*.mdb
 glob:*Infrastructure.dll
 glob:sharp/**/packages/**
 glob:sharp/**/bin/**
+
+glob:cljs/*/out/**
+glob:cljs/*/target/*
+glob:cljs/quickstart/.repl-*/**
+glob:cljs/quickstart/node_modules/**
