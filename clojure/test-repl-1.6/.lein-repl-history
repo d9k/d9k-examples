@@ -19,3 +19,18 @@ exit
 (slope2 [10 10] [10 10])
 (clojure-version)
 exit
+(load-file 'instarepl-ch10.clj')
+(load-file "instarepl-ch10.clj")
+(def server (new-server 8124
+    "/joy/hello"
+    (default-handler "Hello Cleveland")))
+(ns joy.web)
+(def server (new-server 8124
+    (default-handler "Hello Cleveland")))
+(def server (new-server 8124
+    "/joy/hello"
+    (default-handler "Hello Cleveland")))
+(def server (new-server 8125
+    "/joy/hello"
+    (default-handler "Hello Cleveland")))
+exit
