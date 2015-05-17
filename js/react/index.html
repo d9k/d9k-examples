@@ -28,7 +28,9 @@
                 return (
                     <div className="commentList">
                         <Comment author="Pete Hunt">This is first comment</Comment>
-                        <Comment author="Jordan Walke">This is another comment</Comment>
+                        <Comment author="Jordan Walke">
+                            This is ***another*** comment
+                        </Comment>
                     </div>
                 );
             }
@@ -46,12 +48,13 @@
 
         var Comment = React.createClass({
             render: function(){
+                var rawMarkup = marked(this.props.children.toString(), {sanitize: true});
                 return(
                     <div className="comment">
                         <h2 className="commentAuthor">
                             {this.props.author}
                         </h2>
-                        {marked(this.props.children)}
+                        <span dangerouslySetInnerHTML={{__html: rawMarkup}} />
                     </div>
                 );
             }
