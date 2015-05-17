@@ -12,6 +12,21 @@
     <p>[Tutorial: <a href="https://facebook.github.io/react/docs/tutorial.html" target="_blank">https://facebook.github.io/react/docs/tutorial.html</a>]</p>
     <div id="content"></div>
     <script type="text/jsx">
+
+        var Comment = React.createClass({
+            render: function(){
+                var rawMarkup = marked(this.props.children.toString(), {sanitize: true});
+                return(
+                        <div className="comment">
+                            <h2 className="commentAuthor">
+                                {this.props.author}
+                            </h2>
+                            <span dangerouslySetInnerHTML={{__html: rawMarkup}} />
+                        </div>
+                );
+            }
+        });
+
         var CommentBox = React.createClass({
             getInitialState: function(){
                return {data: []}
@@ -29,6 +44,25 @@
                     }.bind(this)
                 });
             },
+            handleCommentSubmit: function(comment){
+                var comments = this.state.data;
+//                var newComments = comments.concat([comment]);
+                comments.push(comment);
+                this.setState({data: comments});
+                $.ajax({
+                    url: this.props.url,
+                    dataType: 'json',
+//                    cache: false,
+                    type: 'POST',
+                    data: comment,
+                    success: function(data) {
+                        this.setState({data: data});
+                    }.bind(this),
+                    error: function(xht, status, err) {
+                        console.error(this.props.url, status, err.toString());
+                    }.bind(this)
+                });
+            },
             componentDidMount: function() {
                 this.loadCommentsFromServer();
                 setInterval(this.loadCommentsFromServer, this.props.pollInterval)
@@ -38,7 +72,7 @@
                     <div className="commentBox">
                        <h1>Comments</h1>
                         <CommentList data={this.state.data} />
-                        <CommentForm />
+                        <CommentForm onCommentSubmit={this.handleCommentSubmit} />
                     </div>
                 );
             }
@@ -69,31 +103,18 @@
                 if (!text || !author){
                     return;
                 }
-                //TODO: send request to the server
+                this.props.onCommentSubmit({author: author, text: text});
                 React.findDOMNode(this.refs.author).value = '';
                 React.findDOMNode(this.refs.text).value = '';
+//                return;
             },
             render: function() {
                 return (
-                    <form className="commentForm">
+                    <form className="commentForm" onSubmit={this.handleSubmit}>
                         <input type="text" placeholder="Your name" ref="author" />
                         <input type="text" placeholder="Say something... (U can use markdown)" ref="text" />
                         <input type="submit" value="Post" />
                     </form>
-                );
-            }
-        });
-
-        var Comment = React.createClass({
-            render: function(){
-                var rawMarkup = marked(this.props.children.toString(), {sanitize: true});
-                return(
-                    <div className="comment">
-                        <h2 className="commentAuthor">
-                            {this.props.author}
-                        </h2>
-                        <span dangerouslySetInnerHTML={{__html: rawMarkup}} />
-                    </div>
                 );
             }
         });

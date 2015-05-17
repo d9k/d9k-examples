@@ -9,6 +9,7 @@
 # WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 #
 # see https://github.com/reactjs/react-tutorial/blob/master/server.py
+# run server: python3.4 server.py
 
 import json
 import os
@@ -24,15 +25,16 @@ SERVER_PORT = 3000
 def comments_handler():
 
     with open('comments.json', 'r') as file:
-        # comments = json.loads(file.read())
-        comments = json.load(file)
+        comments = json.loads(file.read())
+        # comments = json.load(file)
+        pass
 
     if request.method == 'POST':
         comments.append(request.form.to_dict())
 
         with open('comments.json', 'w') as file:
-            # file.write(json.dumps(comments, indent=4, separators=(',', ': ')))
-            file.write(json.dump(comments, file, indent=4, separators=(',', ': ')))
+            file.write(json.dumps(comments, indent=4, separators=(',', ': ')))
+            # file.write(json.dump(comments, file, indent=4, separators=(',', ': ')))
 
     return Response(json.dumps(comments), mimetype='application/json', headers={'Cache-Control': 'no-cache'})
 
