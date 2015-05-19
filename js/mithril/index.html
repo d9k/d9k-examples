@@ -31,9 +31,9 @@
                 //description of NEW  t o d o  element
                 todo.vm.description = m.prop('');
 
-                todo.vm.add = function (description){
-                    if (description()){
-                        todo.vm.list.push(new todo.Todo({description: description()}));
+                todo.vm.add = function (){
+                    if (todo.vm.description()){
+                        todo.vm.list.push(new todo.Todo({description: todo.vm.description()}));
                         todo.vm.description("");
                     }
                 }
@@ -53,20 +53,26 @@
                         value: todo.vm.description(),
                         onchange: m.withAttr("value", todo.vm.description)
                     }),
-                    m("button", {
-                        onclick: todo.vm.add.bind(todo.vm, todo.vm.description)
-                    }, "Add"),
+                    m("button", {onclick: todo.vm.add}, "Add"),
                     m("table", [
-                        m("tr", [
-                            m("td", [
-                                m("input[type=checkbox]")
-                            ]),
-                            m("td", "task description")
-                        ])
-                    ])
-                ])
-            ]);
-        };
+                        todo.vm.list.map(function(task, index) {
+                            return m("tr", [
+                                m("td", [
+                                    m("input[type=checkbox]", {
+                                        onclick: m.withAttr('checked', task.done),
+                                        checked: task.done()
+                                    })
+                                ]),
+                                m("td", task.description())
+                            ]);
+                        }) //tr list map
+                    ]) //table
+                ]) //body
+            ]); //html
+        }; //t o d o.view
+
+        //auto-redrawing system. Second param is component, must have controller and view
+        m.mount(document, todo);
     </script>
 </head>
 <body>
