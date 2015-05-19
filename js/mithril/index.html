@@ -40,8 +40,33 @@
             }
         };
 
-        todo.vm.init();
+        //since business logic goes to model and view-model, controller can be stripped down to minimum
+        todo.controller = function(){
+            todo.vm.init();
+        };
 
+        //no templates, debuggable view
+        todo.view = function(){
+            return m("html" , [
+                m("body", [
+                    m("input", {
+                        value: todo.vm.description(),
+                        onchange: m.withAttr("value", todo.vm.description)
+                    }),
+                    m("button", {
+                        onclick: todo.vm.add.bind(todo.vm, todo.vm.description)
+                    }, "Add"),
+                    m("table", [
+                        m("tr", [
+                            m("td", [
+                                m("input[type=checkbox]")
+                            ]),
+                            m("td", "task description")
+                        ])
+                    ])
+                ])
+            ]);
+        };
     </script>
 </head>
 <body>
