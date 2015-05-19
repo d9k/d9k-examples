@@ -6,76 +6,73 @@
     <script src="mithril.min.js"></script>
     <!-- for IE8: -->
     <script src="es5-shim.min.js"></script>
-    <script>
-        /** @link http://lhorie.github.io/mithril/getting-started.html = tutorial*/
-//        var myComponent = {
-//            controller: function() {},
-//            view: function() {}
-//        }
-        //t o d o  component and namespace:
-        var todo = {};
-
-        todo.Todo = function(data){
-            this.description = m.prop(data.description);
-            this.done= m.prop(false);
-        };
-
-        //list of  T o d o ' s
-        todo.TodoList = Array;
-
-        //view-model - entity that stores view state
-        todo.vm = {
-            init: function(){
-                //why not this.list?
-                todo.vm.list = new todo.TodoList();
-                //description of NEW  t o d o  element
-                todo.vm.description = m.prop('');
-
-                todo.vm.add = function (){
-                    if (todo.vm.description()){
-                        todo.vm.list.push(new todo.Todo({description: todo.vm.description()}));
-                        todo.vm.description("");
-                    }
-                }
-            }
-        };
-
-        //since business logic goes to model and view-model, controller can be stripped down to minimum
-        todo.controller = function(){
-            todo.vm.init();
-        };
-
-        //no templates, debuggable view
-        todo.view = function(){
-            return m("html" , [
-                m("body", [
-                    m("input", {
-                        value: todo.vm.description(),
-                        onchange: m.withAttr("value", todo.vm.description)
-                    }),
-                    m("button", {onclick: todo.vm.add}, "Add"),
-                    m("table", [
-                        todo.vm.list.map(function(task, index) {
-                            return m("tr", [
-                                m("td", [
-                                    m("input[type=checkbox]", {
-                                        onclick: m.withAttr('checked', task.done),
-                                        checked: task.done()
-                                    })
-                                ]),
-                                m("td", task.description())
-                            ]);
-                        }) //tr list map
-                    ]) //table
-                ]) //body
-            ]); //html
-        }; //t o d o.view
-
-        //auto-redrawing system. Second param is component, must have controller and view
-        m.mount(document, todo);
-    </script>
 </head>
 <body>
+    <div id="display"></div>
+    <script>
+        /** @link http://lhorie.github.io/mithril/getting-started.html = tutorial*/
+        // var myComponent = {
+        //      controller: function() {},
+        //      view: function() {}
+        // }
 
+        //t o d o  component and namespace:
+        var todo = {
+            Todo : function(data){
+                this.description = m.prop(data.description);
+                this.done= m.prop(false);
+            },
+            //list of  T o d o ' s
+            TodoList: Array,
+            //view-model - entity that stores view state
+            vm: {
+                init: function(){
+                    //why not this.list?
+                    todo.vm.list = new todo.TodoList();
+                    //description of NEW  t o d o  element
+                    todo.vm.description = m.prop('');
+
+                    todo.vm.add = function (){
+                        if (todo.vm.description()){
+                            todo.vm.list.push(new todo.Todo({description: todo.vm.description()}));
+                            todo.vm.description("");
+                        }
+                    }
+                }
+            },
+            //since business logic goes to model and view-model, controller can be stripped down to minimum
+            controller: function(){
+                todo.vm.init();
+            },
+            //no templates, debuggable view
+            view: function(){
+                return m("html" , [
+                    m("body", [
+                        m("input", {
+                            value: todo.vm.description(),
+                            onchange: m.withAttr("value", todo.vm.description)
+                        }),
+                        m("button", {onclick: todo.vm.add}, "Add"),
+                        m("table", [
+                            todo.vm.list.map(function(task, index) {
+                                return m("tr", [
+                                    m("td", [
+                                        m("input[type=checkbox]", {
+                                            onclick: m.withAttr('checked', task.done),
+                                            checked: task.done()
+                                        })
+                                    ]),
+                                    m("td", task.description())
+                                ]);
+                            }) //tr list map
+                        ]) //table
+                    ]) //body
+                ]); //html
+            } //t o d o.view
+        };
+
+        //auto-redrawing system. Second param is component, must have controller and view
+        m.mount(document.getElementById('display'), todo);
+    </script>
 </body>
 </html>
