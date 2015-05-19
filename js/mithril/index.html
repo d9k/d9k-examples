@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>Todo app</title>
+    <script src="mithril.min.js"></script>
+    <!-- for IE8: -->
+    <script src="es5-shim.min.js"></script>
+    <script>
+        /** @link http://lhorie.github.io/mithril/getting-started.html = tutorial*/
+//        var myComponent = {
+//            controller: function() {},
+//            view: function() {}
+//        }
+        //t o d o  component and namespace:
+        var todo = {};
+
+        todo.Todo = function(data){
+            this.description = m.prop(data.description);
+            this.done= m.prop(false);
+        };
+
+        //list of  T o d o ' s
+        todo.TodoList = Array;
+
+        //view-model - entity that stores view state
+        todo.vm = {
+            init: function(){
+                //why not this.list?
+                todo.vm.list = new todo.TodoList();
+                //description of NEW  t o d o  element
+                todo.vm.description = m.prop('');
+
+                todo.vm.add = function (description){
+                    if (description()){
+                        todo.vm.list.push(new todo.Todo({description: description()}));
+                        todo.vm.description("");
+                    }
+                }
+            }
+        };
+
+        todo.vm.init();
+
+    </script>
+</head>
+<body>
+
+</body>
+</html>
