@@ -25,36 +25,33 @@
             //list of  T o d o ' s
             TodoList: Array,
             //view-model - entity that stores view state
-            vm: {
-                init: function(){
-                    //why not this.list?
-                    todo.vm.list = new todo.TodoList();
-                    //description of NEW  t o d o  element
-                    todo.vm.description = m.prop('');
+             //since business logic goes to model and view-model, controller can be stripped down to minimum
+            controller: function(){
+                //why not this.list?
+                this.list = new todo.TodoList();
+                //description of NEW  t o d o  element
+                this.description = m.prop('');
 
-                    todo.vm.add = function (){
-                        if (todo.vm.description()){
-                            todo.vm.list.push(new todo.Todo({description: todo.vm.description()}));
-                            todo.vm.description("");
-                        }
+                var self = this;
+
+                this.add = function (){
+                    if (self.description()){
+                        self.list.push(new todo.Todo({description: self.description()}));
+                        self.description("");
                     }
                 }
             },
-            //since business logic goes to model and view-model, controller can be stripped down to minimum
-            controller: function(){
-                todo.vm.init();
-            },
             //no templates, debuggable view
-            view: function(){
+            view: function(controller){
                 return m("html" , [
                     m("body", [
                         m("input", {
-                            value: todo.vm.description(),
-                            onchange: m.withAttr("value", todo.vm.description)
+                            value: controller.description(),
+                            onchange: m.withAttr("value", controller.description)
                         }),
-                        m("button", {onclick: todo.vm.add}, "Add"),
+                        m("button", {onclick: controller.add}, "Add"),
                         m("table", [
-                            todo.vm.list.map(function(task, index) {
+                            controller.list.map(function(task, index) {
                                 return m("tr", [
                                     m("td", [
                                         m("input[type=checkbox]", {
