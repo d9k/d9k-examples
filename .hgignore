@@ -6,6 +6,7 @@ regexp:^cljs/quickstart/cljs\.jar
 regexp:^java/idea-plugin-test00/
 regexp:^java/DiskRead/.*\.jar
 regexp:^java/DiskRead/out
+regexp:^java/processing-test/out
 regexp:^python/microblog/
 regexp:^python/flask/
 regexp:^python/wagtail_test/
