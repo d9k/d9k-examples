@@ -5,5 +5,5 @@ requires = [
 ]
 
 setup(name='tutorial',
-      install_requites=requires,
+      install_requires=requires,
 )

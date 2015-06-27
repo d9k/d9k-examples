@@ -13,6 +13,7 @@ regexp:^python/wagtail_test/
 regexp:^python/flaskr/__pycache__/
 regexp:^python/flaskr/venv/
 regexp:^python/pyramid-tut/venv/
+regexp:^python/pyramid-tut/.+/__pycache__/
 
 # visual studio junk filter
 glob:*.exe
