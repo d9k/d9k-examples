@@ -6,7 +6,8 @@ from pyramid.security import (
 )
 from pyramid.view import (
     view_config,
-    view_defaults
+    view_defaults,
+    forbidden_view_config
 )
 from .security import USERS
 
@@ -21,7 +22,7 @@ class TutorialViews:
     def home(self):
         return {'name': 'Home View'}
 
-    @view_config(route_name='hello')
+    @view_config(route_name='hello', permission='edit')
     def hello(self):
         return {'name': 'Hello View'}
 
