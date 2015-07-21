@@ -16,6 +16,8 @@ regexp:^python/pyramid-tut/venv/
 regexp:^python/pyramid-tut/.+/__pycache__/
 regexp:^python/kotti/mysite/lib
 regexp:^python/kotti/mysite/bin
+regexp:^python/falcon-tut/.+/__pycache__/
+regexp:^python/falcon-tut/.+/venv/
 
 # visual studio junk filter
 glob:*.exe
