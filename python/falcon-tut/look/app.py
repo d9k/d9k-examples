@@ -1,6 +1,13 @@
 import falcon
 import images
 
+# import sys
+# sys.path.insert(1, '/home/d9k/.IntelliJIdea15/config/plugins/python/helpers/pycharm')
+# sys.path.insert(1, '/home/d9k/.IntelliJIdea15/config/plugins/python/helpers/pydev')
+# import pydevd
+# pydevd.settrace('localhost', port=8000, stdoutToServer=True, stderrToServer=True)
+
+
 api = application = falcon.API()
 
 storage_path = 'img'
