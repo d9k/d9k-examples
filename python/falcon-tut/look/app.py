@@ -3,5 +3,10 @@ import images
 
 api = application = falcon.API()
 
-images = images.Resource()
-api.add_route('/images', images)
+storage_path = 'img'
+
+image_collection = images.Collection(storage_path)
+image = images.Item(storage_path)
+
+api.add_route('/images', image_collection)
+api.add_route('/images/{name}', image)

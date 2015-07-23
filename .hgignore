@@ -18,6 +18,7 @@ regexp:^python/kotti/mysite/lib
 regexp:^python/kotti/mysite/bin
 regexp:^python/falcon-tut/.+/__pycache__/
 regexp:^python/falcon-tut/.+/venv/
+regexp:^python/falcon-tut/look/img/.+
 
 # visual studio junk filter
 glob:*.exe
