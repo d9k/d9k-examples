@@ -10,8 +10,7 @@ ALLOWED_IMAGE_TYPES = (
     'image/png',
 )
 
-
-VALID_IMAGE_NAME = re.compile(r'[a-f0-9]{10}\.(jpeg|gif|png)$')
+VALID_IMAGE_NAME = re.compile(r'[a-f0-9\-]+\.(jpeg|gif|png)$')
 
 
 # def extract_project_id(req, resp, resource, params):
@@ -74,6 +73,7 @@ class Item(object):
         self.storage_path = storage_path
 
     def on_get(self, req, resp, name):
+
         if not VALID_IMAGE_NAME.match(name):
             raise falcon.HTTPNotFound()
 
@@ -81,8 +81,10 @@ class Item(object):
         resp.content_type = _ext_to_media_type(ext)
 
         image_path = os.path.join(self.storage_path, name)
+
         try:
             resp.stream = open(image_path, 'rb')
         except IOError:
             raise falcon.HTTPNotFound
+
         resp.stream_len = os.path.getsize(image_path)

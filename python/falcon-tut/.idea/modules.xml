@@ -2,7 +2,8 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/falcon-tut.iml" filepath="$PROJECT_DIR$/.idea/falcon-tut.iml" />
+      <module fileurl="file://$PROJECT_DIR$/falcon-tut.iml" filepath="$PROJECT_DIR$/falcon-tut.iml" />
+      <module fileurl="file://$PROJECT_DIR$/look/look.iml" filepath="$PROJECT_DIR$/look/look.iml" />
     </modules>
   </component>
 </project>
