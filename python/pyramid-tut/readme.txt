@@ -16,7 +16,7 @@ installation:
 
 	easy_install "pyramid==1.5.7"
 	easy_install nose webtest deform sqlalchemy pyramid_chameleon pyramid_debugtoolbar waitress pyramid_tm zope.sqlalchemy
-	
+
 http://docs.pylonsproject.org/projects/pyramid/en/latest/quick_tutorial/scaffolds.html
 
 	hash -r
@@ -27,3 +27,5 @@ http://docs.pylonsproject.org/projects/pyramid/en/latest/quick_tutorial/scaffold
 
 #Server run (after /venv/bin/activate !):
 #python flaskr.py
+
+jinja2: in more_view_classes tutorial
