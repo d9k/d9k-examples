@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<returnPaymentRequest 
+clientOrderId="12345" 
+requestDT="2011-07-02T20:38:00.000Z" 
+invoiceId="2000000123" 
+shopId="6689" 
+amount="10.00" 
+currency="RUB" 
+cause="Пользователь отказался принять заказ" 
+/>
