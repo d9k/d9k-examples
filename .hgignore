@@ -20,6 +20,8 @@ regexp:^python/falcon-tut/.+/__pycache__/
 regexp:^python/falcon-tut/.+/venv/
 regexp:^python/falcon-tut/venv/.+
 regexp:^python/falcon-tut/look/img/.+
+regexp:^sass/bootstrap-sass-test/\.sass-cache
+regexp:^sass/bootstrap-sass-test/new-project
 
 # visual studio junk filter
 glob:*.exe
