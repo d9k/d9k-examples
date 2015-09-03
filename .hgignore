@@ -24,6 +24,7 @@ regexp:^sass/bootstrap-sass-test/\.sass-cache
 regexp:^sass/bootstrap-sass-test/new-project
 regexp:^tools/gulp\.js/gulp-bootstrap-sass/bower_components/.+
 regexp:^tools/gulp\.js/gulp-bootstrap-sass/node_modules/.+
+regexp:^tools/gulp\.js/gulp-bootstrap-sass/\.sass-cache/.+
 
 # visual studio junk filter
 glob:*.exe
