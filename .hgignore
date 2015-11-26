@@ -20,6 +20,11 @@ regexp:^python/falcon-tut/.+/__pycache__/
 regexp:^python/falcon-tut/.+/venv/
 regexp:^python/falcon-tut/venv/.+
 regexp:^python/falcon-tut/look/img/.+
+regexp:^sass/bootstrap-sass-test/\.sass-cache
+regexp:^sass/bootstrap-sass-test/new-project
+regexp:^tools/gulp\.js/gulp-bootstrap-sass/bower_components/.+
+regexp:^tools/gulp\.js/gulp-bootstrap-sass/node_modules/.+
+regexp:^tools/gulp\.js/gulp-bootstrap-sass/\.sass-cache/.+
 regexp:^js/express/express-test/node_modules/.+
 
 # visual studio junk filter
@@ -33,4 +38,3 @@ glob:cljs/*/out/**
 glob:cljs/*/target/*
 glob:cljs/quickstart/.repl-*/**
 glob:cljs/quickstart/node_modules/**
-
