@@ -19,6 +19,13 @@ base:setField(1)
 print(base:getField())
 
 local child = Child.new(1, 2)
+-- see watches:
+--
+-- getmetatable(child) 
+-- > {__index = {_NAME="Child", ...}}
+--
+-- getmetatable(getmetatable(child).__index)
+-- > {__index = {_NAME="Base", ...}}
 print(child.getField())
 child:setField(1)
 print(child:getField())

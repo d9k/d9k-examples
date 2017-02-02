@@ -1,7 +1,7 @@
 local core = _G
 
 module('Child')
-metatable = { __index = _M }
+classMetatable = { __index = _M }
 
 local Factory = core.require('Factory')
 local Base = core.require('Base')

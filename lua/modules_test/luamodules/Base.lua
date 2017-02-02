@@ -1,7 +1,7 @@
 local core = _G
 
 module('Base')
-metatable = { __index = _M }
+classMetatable = { __index = _M }
 
 -- require AFTER module() !
 local Factory = core.require('Factory')
