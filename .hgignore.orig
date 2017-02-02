@@ -25,11 +25,14 @@ regexp:^sass/bootstrap-sass-test/new-project
 regexp:^tools/gulp\.js/gulp-bootstrap-sass/bower_components/.+
 regexp:^tools/gulp\.js/gulp-bootstrap-sass/node_modules/.+
 regexp:^tools/gulp\.js/gulp-bootstrap-sass/\.sass-cache/.+
-regexp:^js/express/express-test/node_modules/.+
-regexp:^js/electron/electron-app/node_modules/.+
+<<<<<<< local
 regexp:^scala/todolist/target
 regexp:^scala/todolist/project/target
 regexp:^scala/todolist/project/project/target
+=======
+regexp:^js/express/express-test/node_modules/.+
+regexp:^js/electron/electron-app/node_modules/.+
+>>>>>>> other
 
 # visual studio junk filter
 glob:*.exe
