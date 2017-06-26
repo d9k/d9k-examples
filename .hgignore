@@ -30,6 +30,8 @@ regexp:^js/electron/electron-app/node_modules/.+
 regexp:^scala/todolist/target
 regexp:^scala/todolist/project/target
 regexp:^scala/todolist/project/project/target
+regexp:^js/polymer-with-otters/bower_components/.+
+regexp:^js/polymer-with-otters/node_modules/.+
 
 # visual studio junk filter
 glob:*.exe

@@ -1,0 +1,7 @@
+{
+  "name": "Polymer with otters tutorial",
+  "version": "0.0.1",
+  "dependencies": {
+    "webcomponentsjs": "webcomponents/webcomponentsjs#^1.0.1"
+  }
+}
