@@ -1,3 +1,8 @@
 https://meowni.ca/posts/web-components-with-otters/
 
-TODO bower commands
+
+How bower.json was made:
+
+bower init
+bower install --save webcomponents/webcomponentsjs
+
