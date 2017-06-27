@@ -5,22 +5,26 @@
     <title>title</title>
     <script>
     (function() {
-      if ('registerElement' in document
-          && 'import' in document.createElement('link')
-          && 'content' in document.createElement('template')) {
-        // platform is good!
-      } else {
-        // polyfill the platform!
-        var e = document.createElement('script');
-        e.src = '/bower_components/webcomponentsjs/webcomponents-lite.min.js';
-        document.body.appendChild(e);
-      }
+      //if ('registerElement' in document
+          //&& 'import' in document.createElement('link')
+          //&& 'content' in document.createElement('template')) {
+         //platform is good!
+      //} else {
+         //polyfill the platform!
+        //var e = document.createElement('script');
+        //e.src = '/bower_components/webcomponentsjs/webcomponents-lite.min.js';
+        //document.body.appendChild(e);
+      //}
     })();
     </script>
     <!--<link rel="stylesheet" href="style.css">-->
     <!--<script src="script.js"></script>-->
   </head>
   <body>
+    <link rel="import" href="bower_components/paper-button/paper-button.html">
+    <h1>Oh, hi there</h1>
+    
+    <paper-button>Hit me!</paper-button>
     <!-- page content -->
   </body>
 </html>
