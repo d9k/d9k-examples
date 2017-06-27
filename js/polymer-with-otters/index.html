@@ -16,15 +16,23 @@
         //document.body.appendChild(e);
       //}
     })();
+    
+    document.addEventListener("DOMContentLoaded", function(){
+      document.querySelector('paper-button').addEventListener('click', function(){
+        alert('You clicked !');
+      });
+    });
     </script>
     <!--<link rel="stylesheet" href="style.css">-->
     <!--<script src="script.js"></script>-->
   </head>
   <body>
     <link rel="import" href="bower_components/paper-button/paper-button.html">
+    <link rel="import" href="lib/my-element.html">
     <h1>Oh, hi there</h1>
     
     <paper-button>Hit me!</paper-button>
+    <my-element />
     <!-- page content -->
   </body>
 </html>

@@ -1,0 +1,18 @@
+<dom-module id="my-element">
+  <template>
+    <style>
+      :host {}      
+      p {color: tomato}
+    </style>
+    
+    <p>I should be a nice red!</p>
+  </template>
+  
+  <script>
+    class MyElement extends Polymer.Element {
+      static get is() {return 'my-element';}
+    };
+    
+    customElements.define(MyElement.is, MyElement)
+  </script>
+</dom-module>
