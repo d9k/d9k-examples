@@ -33,7 +33,7 @@ regexp:^scala/todolist/project/project/target
 regexp:^js/polymer-with-otters/bower_components/.+
 regexp:^js/polymer-with-otters/node_modules/.+
 regexp:^cljs/cljs-lumo/node_modules
-regexp:^lua/lapis_test/log/
+regexp:^lua/lapis_test/logs/
 
 # visual studio junk filter
 glob:*.exe
