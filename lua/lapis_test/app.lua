@@ -4,20 +4,9 @@ local config_factory = require('lapis.config')
 local to_json = require('lapis.util').to_json
 local after_dispatch = require('lapis.nginx.context').after_dispatch
 
-config_factory("development", {
---  port = 9001,
---  logging = {
---    queries = true,
---    requests = true
---  },
---  secret = "please-change-me",
---  session_name = "lapis_session",
-  measure_performance = true
-})
-
 local app = lapis.Application()
 
-print([===[   ////NOTICE ME!////   ]===])
+-- print([===[   ////NOTICE ME!////   ]===])
 
 app:get("/", function()
   return "Welcome to Lapis " .. require("lapis.version")
@@ -35,7 +24,8 @@ app:get("/lua_debug", function()
   ngx.say("Done debugging.")
   require('mobdebug').done()
   config = config_factory.get()
-  ngx.say(config._name)
+  ngx.say('Config environment: ' .. config._name)
+  -- ngx.say(config.secret)
 end)
 
 if is_dev_env() then

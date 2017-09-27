@@ -34,6 +34,7 @@ regexp:^js/polymer-with-otters/bower_components/.+
 regexp:^js/polymer-with-otters/node_modules/.+
 regexp:^cljs/cljs-lumo/node_modules
 regexp:^lua/lapis_test/logs/
+regexp:^lua/lapis_test/config_passwords.lua
 
 # visual studio junk filter
 glob:*.exe

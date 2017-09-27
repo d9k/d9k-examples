@@ -1,12 +1,17 @@
-local config_factory = require("lapis.config")
+local config_factory = require('lapis.config')
+
+-- copy config_passwords.lua.template to config_passwords.lua and set values!
+local config_passwords = require('config_passwords')
+
+-- print(config_passwords.secret)
 
 config_factory("development", {
   port = 9001,
---  logging = {
---    queries = true,
---    requests = true
---  },
---  secret = "please-change-me",
---  session_name = "lapis_session",
---  measure_performance = true
+  logging = {
+    queries = true,
+    requests = true
+  },
+  secret = config_passwords.secret,
+  session_name = "d9k_lapis_test_session",
+  measure_performance = true
 })
