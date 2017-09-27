@@ -8,8 +8,8 @@ local config_passwords = require('config_passwords')
 config_factory("development", {
   port = 9001,
   logging = {
-    queries = true,
-    requests = true
+    queries = true, -- default: true
+    requests = true -- default: true
   },
   secret = config_passwords.secret,
   session_name = "d9k_lapis_test_session",

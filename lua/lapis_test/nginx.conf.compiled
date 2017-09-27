@@ -12,6 +12,8 @@ http {
   include mime.types;
 
   server {
+    error_log logs/with_notices.log notice;
+
     listen 9001;
     lua_code_cache off;
 
