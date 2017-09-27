@@ -12,7 +12,7 @@ http {
   include mime.types;
 
   server {
-    listen 8080;
+    listen 9001;
     lua_code_cache off;
 
     location / {
