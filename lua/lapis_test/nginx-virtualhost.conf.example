@@ -1,0 +1,13 @@
+upstream upstream-lapis-test {
+    server 127.0.0.1:9001;
+}
+
+server {
+  server_name lapis-test.local;
+
+  location / {
+     proxy_pass http://upstream-lapis-test;
+  }
+
+}
+
