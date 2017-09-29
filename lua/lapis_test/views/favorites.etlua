@@ -1,0 +1,8 @@
+<h1>Here are my few favorite things</h1>
+<ol>
+  <% for i, thing in pairs(favorite_things) do %>
+    <li><%= thing %></li>
+  <% end %>
+</ol>
+
+<p><i>(These are a few of my favorite things).</i></p>

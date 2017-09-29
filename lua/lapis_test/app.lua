@@ -6,10 +6,26 @@ local after_dispatch = require('lapis.nginx.context').after_dispatch
 
 local app = lapis.Application()
 
+app:enable('etlua') -- By default Lapis searches for views in views/ directory.
+app.layout = require 'views.layout'
+
 -- print([===[   ////NOTICE ME!////   ]===])
 
-app:get("/", function()
-  return "Welcome to Lapis " .. require("lapis.version")
+app:get('/', function(self)
+  -- return "Welcome to Lapis " .. require("lapis.version")
+  self.lapis_version = require('lapis.version')
+  return { render = 'index'}
+end)
+
+app:get('/favorites', function(self)
+  self.page_title = 'Favorite things'
+  self.favorite_things = {
+    'Girls in white dresses with blue satin sashes',
+    'Snowflakes that stay on my nose and eyelashes',
+    'Wild geese that fly with the moon on their wings'
+  }
+
+  return { render = 'favorites' }
 end)
 
 local is_dev_env = function()
