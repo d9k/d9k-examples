@@ -1,0 +1,14 @@
+<h3>Params</h3>
+<p>self name: <%= name %></p>
+<p>self action: <%= action %></p>
+
+<h3>Pattern</h3>
+<p>route pattern: "<%= test_routing %>"</p>
+
+<h3>Routes</h3>
+
+<p><a href="<%= url1 %>"><%= url1 %></a></p>
+<p><a href="<%= url2 %>"><%= url2 %></a></p>
+<p><a href="<%= url3 %>"><%= url3 %></a> - action set, name was not set</p>
+<p><a href="<%= url4 %>"><%= url4 %></a></p>
+<p><a href="<%= url5 %>"><%= url5 %></a></p>

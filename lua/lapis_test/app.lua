@@ -11,6 +11,11 @@ app.layout = require 'views.layout'
 
 -- print([===[   ////NOTICE ME!////   ]===])
 
+local is_dev_env = function()
+  config = config_factory.get()
+  return config._name == "development"
+end
+
 app:get('/', function(self)
   -- return "Welcome to Lapis " .. require("lapis.version")
   self.lapis_version = require('lapis.version')
@@ -28,11 +33,6 @@ app:get('/favorites', function(self)
   return { render = 'favorites' }
 end)
 
-local is_dev_env = function()
-  config = config_factory.get()
-  return config._name == "development"
-end
-
 app:get("/lua_debug", function()
   require('mobdebug').start()
   local name = ngx.var.arg_name or "Anonymous"
@@ -42,6 +42,22 @@ app:get("/lua_debug", function()
   config = config_factory.get()
   ngx.say('Config environment: ' .. config._name)
   -- ngx.say(config.secret)
+end)
+
+local test_routing = '/test_routing(/:name(/:action))'
+
+app:match('test_routing', test_routing, function(self)
+  self.test_routing = test_routing
+  self.name = self.params.name or '[no name]'
+  self.action = self.params.action or '[no action]'
+  self.url1 = self:url_for('test_routing')
+  self.url2 = self:url_for('test_routing', {name='test_name'})
+  self.url3 = self:url_for('test_routing', {action='test_action'})
+  self.url4 = self:url_for('test_routing', {action='test_action', name='test_name'})
+  self.url5 = self:url_for('test_routing', {name='test_name'}, {query_param1='value1', query_param2='value2'})
+  return {
+    render = true -- template by name
+  }
 end)
 
 if is_dev_env() then
