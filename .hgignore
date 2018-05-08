@@ -1,4 +1,5 @@
 regexp:^bkuppr
+regexp:^bkuppr
 regexp:^drl
 regexp:^go
 regexp:^nodejs/
@@ -35,6 +36,7 @@ regexp:^js/polymer-with-otters/node_modules/.+
 regexp:^cljs/cljs-lumo/node_modules
 regexp:^lua/lapis_test/logs/
 regexp:^lua/lapis_test/config_passwords.lua
+regexp:^coffee/coffee2/node_modules/
 
 # visual studio junk filter
 glob:*.exe

@@ -1,0 +1,16 @@
+{
+  "name": "coffee2",
+  "version": "0.0.1",
+  "description": "coffeescript 2 gulp test",
+  "author": "d9k <d9k@ya.ru>",
+  "license": "ISC",
+  "devDependencies": {
+    "babel-core": "^6.26.3",
+    "babel-polyfill": "^6.26.0",
+    "babel-preset-env": "^1.6.1",
+    "gulp": "^3.9.1",
+    "gulp-babel": "^7.0.1",
+    "gulp-coffee": "^3.0.2",
+    "gulp-util": "^3.0.8"
+  }
+}
