@@ -22,13 +22,21 @@ docReady(function () {
       //m("main", [
       //m("h1", {class: "title"}, "My first app"),
       // changed the next line
-      return m('button', {
-        onclick: function onclick() {
-          var count;
-          count = storeGet(self.count_path);
-          storeSet(self.count_path, count + self.delta);
-        }
-      }, self.count_path + ': ' + storeGet(self.count_path));
+
+      //m 'button', { onclick: ->
+      //count = storeGet(self.count_path)
+      //storeSet self.count_path, count + self.delta
+      //return
+      //}, self.count_path + ': ' + storeGet(self.count_path)
+      return m(
+        'button',
+        { onclick: function onclick() {
+            var count;
+            count = storeGet(self.count_path);
+            return storeSet(self.count_path, count + self.delta);
+          } },
+        self.count_path + ': ' + storeGet(self.count_path)
+      );
     }
   };
   //,

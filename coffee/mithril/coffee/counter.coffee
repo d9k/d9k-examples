@@ -5,7 +5,9 @@ docReady ->
   #data.count = 0;
   storeSet 'count1', 0
   storeSet 'count2', 0
+
   elById = document.getElementById.bind(document)
+
   Hello =
     oninit: (vnode) ->
       @count_path = vnode.attrs.count_path
@@ -18,19 +20,32 @@ docReady ->
       #m("main", [
       #m("h1", {class: "title"}, "My first app"),
       # changed the next line
-      m 'button', { onclick: ->
-        count = storeGet(self.count_path)
-        storeSet self.count_path, count + self.delta
-        return
- }, self.count_path + ': ' + storeGet(self.count_path)
+#
+      #m 'button', { onclick: ->
+        #count = storeGet(self.count_path)
+        #storeSet self.count_path, count + self.delta
+        #return
+      #}, self.count_path + ': ' + storeGet(self.count_path)
+
+      <button
+          onclick = {() ->
+            count = storeGet(self.count_path);
+            storeSet(self.count_path, count + self.delta);
+          }
+        >
+        {self.count_path + ': ' + storeGet(self.count_path)}
+      </button>
       #,
       #)
+
   m.mount elById('counter1'), view: ->
     m Hello, count_path: 'count1'
+
   m.mount elById('counter1_10'), view: ->
     m Hello,
       count_path: 'count1'
       delta: 10
+
   m.mount elById('counter2'), view: ->
     m Hello, count_path: 'count2'
   return

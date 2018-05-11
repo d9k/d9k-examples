@@ -24,9 +24,16 @@ gulp.task('es6', function () {
 	.pipe(babel({
 		presets: [
       // Without any configuration options, babel-preset-env behaves exactly the same as babel-preset-latest (or babel-preset-es2015, babel-preset-es2016, and babel-preset-es2017 together).
-      'env'
+      'env',
+
     //'es2015', 'stage-0'//, 'react'
     //, 'es2016', 'es2017'
+    ],
+    plugins: [
+      ["transform-react-jsx", {
+        "pragma": "m" // default pragma is React.createElement
+        //,useBuiltIns: true
+      }]
     ],
     // plugins: ['transform-runtime'],
 		sourceRoot: 'src',
