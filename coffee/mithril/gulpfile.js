@@ -16,6 +16,8 @@ gulp.task('coffee', function(){
         // bare option: see http://coffeescript.org/#lexical-scope
         //.pipe(sourcemaps.init())
         .pipe(coffee({
+          "inline-map": true, //doesn't work
+          //bare: true,
           transpile: {
             presets: [
               // Without any configuration options, babel-preset-env behaves exactly the same as babel-preset-latest (or babel-preset-es2015, babel-preset-es2016, and babel-preset-es2017 together).
@@ -30,7 +32,7 @@ gulp.task('coffee', function(){
           }
         }))//.on('error', gutil.log))
         //.pipe(coffee({bare: true}))//.on('error', gutil.log))
-        //.pipe(sourcemaps.write())
+        //.pipe(sourcemaps.write('.'))
         //.pipe(gulp.dest(config.es6Path));
         .pipe(gulp.dest(config.staticDir + '/js'));
 });
@@ -60,6 +62,12 @@ gulp.task('coffee', function(){
 //	}))
 //	.pipe(gulp.dest(config.staticDir + '/js'));
 //});
+
+// Rerun the task when a file changes
+gulp.task('watch', function() {
+    gulp.watch(config.coffeePath + '/**/*.coffee', ['coffee']);
+    //gulp.watch(config.es6Path + '/**/*.es6', ['es6']);
+ });
 
 
 //gulp.task('default', ['coffee', 'es6']);
