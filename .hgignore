@@ -38,6 +38,7 @@ regexp:^lua/lapis_test/logs/
 regexp:^lua/lapis_test/config_passwords.lua
 regexp:^coffee/coffee2/node_modules/
 regexp:^coffee/mithril/node_modules/
+regexp:^coffee/mithril-components/node_modules/
 
 # visual studio junk filter
 glob:*.exe
