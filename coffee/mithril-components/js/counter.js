@@ -18,7 +18,7 @@
 
   Counter = {
     oninit: function oninit(vnode) {
-      this.count_path = vnode.attrs.count_path;
+      this.storePath = vnode.attrs.storePath;
       this.delta = vnode.attrs.delta || 1;
     },
     //this.store = vnode.attrs.store;
@@ -39,10 +39,10 @@
         'button',
         { onclick: function onclick() {
             var count;
-            count = storeGet(self.count_path);
-            return storeSet(self.count_path, count + self.delta);
+            count = storeGet(self.storePath);
+            return storeSet(self.storePath, count + self.delta);
           } },
-        self.count_path + ': ' + storeGet(self.count_path)
+        self.storePath + ': ' + storeGet(self.storePath)
       );
     }
   };

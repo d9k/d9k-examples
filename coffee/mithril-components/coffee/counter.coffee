@@ -15,13 +15,13 @@
 Counter =
 
   oninit: (vnode) ->
-    @count_path = vnode.attrs.count_path
+    @storePath = vnode.attrs.storePath
     @delta = vnode.attrs.delta or 1
     #this.store = vnode.attrs.store;
     return
 
   view: (vnode) ->
-    console.log JSON.stringify(vnode.attrs) + ' rerender'
+    console.log(JSON.stringify(vnode.attrs) + ' rerender')
     self = this
     #m("main", [
     #m("h1", {class: "title"}, "My first app"),
@@ -35,11 +35,11 @@ Counter =
 
     <button
       onclick = {() ->
-        count = storeGet(self.count_path)
-        storeSet(self.count_path, count + self.delta)
+        count = storeGet(self.storePath)
+        storeSet(self.storePath, count + self.delta)
       }
     >
-      {self.count_path + ': ' + storeGet(self.count_path)}
+      {self.storePath + ': ' + storeGet(self.storePath)}
     </button>
     #,
     #)
