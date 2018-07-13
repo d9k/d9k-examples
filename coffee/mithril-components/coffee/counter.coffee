@@ -14,14 +14,24 @@
 
 Counter =
 
+  initAttrs: (attrs) ->
+    attrs.delta ?= 1
+    attrs.defaultCounterValue ?= 7
+
   oninit: (vnode) ->
-    @storePath = vnode.attrs.storePath
-    @delta = vnode.attrs.delta or 1
+    @domElementId = vnode.attrs.domElementId
+    #@counterPath = vnode.attrs.counterPath
+    #@delta = vnode.attrs.delta or 1
     #this.store = vnode.attrs.store;
     return
 
   view: (vnode) ->
-    console.log(JSON.stringify(vnode.attrs) + ' rerender')
+    attrs = storeGet('ui.' + @domElementId )
+
+    counterPath = attrs.counterPath
+    delta = attrs.delta or 1
+
+    #console.log(JSON.stringify(vnode.attrs) + ' rerender')
     self = this
     #m("main", [
     #m("h1", {class: "title"}, "My first app"),
@@ -33,13 +43,19 @@ Counter =
       #return
     #}, self.count_path + ': ' + storeGet(self.count_path)
 
+    deltaCaption = if delta == 1 then '' else '(Δ=' + delta + ') '
+    count = storeGet(counterPath)
+
+    if not count?
+      storeSet(counterPath, attrs.defaultCounterValue)
+
     <button
       onclick = {() ->
-        count = storeGet(self.storePath)
-        storeSet(self.storePath, count + self.delta)
+        count = storeGet(counterPath)
+        storeSet(counterPath, count + delta)
       }
     >
-      {self.storePath + ': ' + storeGet(self.storePath)}
+      {counterPath + ': ' + deltaCaption + storeGet(counterPath)}
     </button>
     #,
     #)

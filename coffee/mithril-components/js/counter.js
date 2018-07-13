@@ -17,14 +17,24 @@
   var Counter;
 
   Counter = {
-    oninit: function oninit(vnode) {
-      this.storePath = vnode.attrs.storePath;
-      this.delta = vnode.attrs.delta || 1;
+    initAttrs: function initAttrs(attrs) {
+      if (attrs.delta == null) {
+        attrs.delta = 1;
+      }
+      return attrs.defaultCounterValue != null ? attrs.defaultCounterValue : attrs.defaultCounterValue = 7;
     },
+    oninit: function oninit(vnode) {
+      this.domElementId = vnode.attrs.domElementId;
+    },
+    //@counterPath = vnode.attrs.counterPath
+    //@delta = vnode.attrs.delta or 1
     //this.store = vnode.attrs.store;
     view: function view(vnode) {
-      var self;
-      console.log(JSON.stringify(vnode.attrs) + ' rerender');
+      var attrs, count, counterPath, delta, deltaCaption, self;
+      attrs = storeGet('ui.' + this.domElementId);
+      counterPath = attrs.counterPath;
+      delta = attrs.delta || 1;
+      //console.log(JSON.stringify(vnode.attrs) + ' rerender')
       self = this;
       //m("main", [
       //m("h1", {class: "title"}, "My first app"),
@@ -35,14 +45,18 @@
       //storeSet self.count_path, count + self.delta
       //return
       //}, self.count_path + ': ' + storeGet(self.count_path)
+      deltaCaption = delta === 1 ? '' : '(Δ=' + delta + ') ';
+      count = storeGet(counterPath);
+      if (count == null) {
+        storeSet(counterPath, attrs.defaultCounterValue);
+      }
       return m(
         'button',
         { onclick: function onclick() {
-            var count;
-            count = storeGet(self.storePath);
-            return storeSet(self.storePath, count + self.delta);
+            count = storeGet(counterPath);
+            return storeSet(counterPath, count + delta);
           } },
-        self.storePath + ': ' + storeGet(self.storePath)
+        counterPath + ': ' + deltaCaption + storeGet(counterPath)
       );
     }
   };
