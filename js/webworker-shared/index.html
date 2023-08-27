@@ -1,0 +1,27 @@
+<html>
+<head>
+<title>Web shared worker example</title>
+</head>
+<body>
+  <h1>Web shared worker example</h1>
+  <ul>
+    <li><a href="https://stackoverflow.com/questions/51069506/show-message-using-sharedworker-in-all-tabs">doc: Show message using sharedWorker in all tabs</a></li>
+    <li><a href="https://stackoverflow.com/questions/11101834/how-to-debug-shared-webworkers">doc: How to debug shared webworkers?</a></li>
+    <li><a href="https://www.oreilly.com/library/view/learn-ecmascript/9781788620062/806ff569-d791-4555-9804-d3a881bb15a2.xhtml">doc: Terminating a shared worker completely</a></li>
+  </ul>
+  <h2 id="message" />
+  <script>
+  if (typeof w == "undefined") {
+    w = new SharedWorker("worker-shared-counter.js");
+  }
+  w.port.onmessage = function (event) {
+    document.getElementById("message").innerHTML = event.data;
+
+    if (event.data >= 40) {
+      w.port.postMessage('terminate');
+    }
+  };
+  w.port.start();
+  </script>
+</body>
+</html>

@@ -1,0 +1,22 @@
+<html>
+<head>
+<title>Web worker example</title>
+</head>
+<body>
+  <h1>Web worker example</h1>
+  <a href="https://github.com/sudheerj/javascript-interview-questions#give-an-example-of-a-web-worker">doc</a>
+  <h2 id="message" />
+  <script>
+  if (typeof w == "undefined") {
+    w = new Worker("worker-counter.js");
+  }
+  w.onmessage = function (event) {
+    document.getElementById("message").innerHTML = event.data;
+
+    if (event.data >= 20) {
+      w.terminate();
+    }
+  };
+  </script>
+</body>
+</html>
