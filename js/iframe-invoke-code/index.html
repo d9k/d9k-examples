@@ -1,0 +1,26 @@
+<html>
+    <head>
+        <title>Iframe invoke code</title>
+    </head>
+    <body>
+        <p>
+            <a
+                href="https://github.com/sudheerj/javascript-interview-questions#how-do-you-invoke-javascript-code-in-an-iframe-from-parent-page"
+                target="_blank"
+            >
+                doc
+            </a>
+        </p>
+        <iframe name="MyIframe" src="./iframe.html"></iframe>
+        <div>
+            <button id="btn-invoke-code">Invoke code</button>
+        </div>
+        <script>
+            const btnInvokeCode = document.getElementById('btn-invoke-code');
+
+            btnInvokeCode.onclick = () => {
+                window.frames[0].frameElement.contentWindow.updateOutput();
+            }
+        </script>
+    </body>
+</html>
