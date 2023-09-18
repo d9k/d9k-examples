@@ -1,0 +1,19 @@
+<html>
+<head>
+<title>Back button capture: page 2</title>
+</head>
+<body>
+  <h1>Back button capture: page 2</h1>
+  <p>Press back button (or alt-left)</p>
+  <script>
+    window.onbeforeunload = function () {
+      // This code doesn't seem to work anymore due to modern browsers security restriction:
+      // Onbeforeunload is subject of one of bigest missunderstanding in the webdevelopers world :D
+      // 1) It refuses to call all blocking native functions (alert, prompt, confirm). It is obvious from User perspective.
+      //
+      // alert("You work will be lost");
+      console.log("UNLOAD:1");
+    };
+  </script>
+</body>
+</html>
