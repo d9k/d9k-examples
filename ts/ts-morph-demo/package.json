@@ -1,0 +1,10 @@
+{
+	"scripts": {
+    	"run": "ts-node run.ts",
+    	"check": "ts-node check.ts"
+	},
+	"dependencies": {
+		"ts-morph": "^20.0.0",
+		"ts-node": "^10.9.1"
+	}
+}
