@@ -1,4 +1,19 @@
-# React + TypeScript + Vite
+# storybook-7-demo
+
+Created with
+
+```sh
+pnpm create vite
+# choosed react,
+pnpm install
+pnpm run dev
+pnx storybook init --builder=vite
+pnpm run storybook
+```
+
+# Default create-vite docs
+
+## React + TypeScript + Vite
 
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
