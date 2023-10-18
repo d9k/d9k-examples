@@ -35,7 +35,8 @@ for (const [name, declarations] of sourceFile.getExportedDeclarations()) {
     properties.map((p) => {
       const propertyName = p.getName();
       const propertyType = p.getDeclarations()[0].getType().getText();
-      console.log(`${propertyName}: ${propertyType}`);
+      const optionalText = p.isOptional() ? '?' : '';
+      console.log(`${propertyName}${optionalText}: ${propertyType}`);
     });
   });
 }
