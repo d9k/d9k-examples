@@ -44,11 +44,12 @@ See
 
 ## Generate schema
 
-- [without relations :(](https://github.com/SpringTree/pg-tables-to-jsonschema/issues/27)
-
 Copy `.env.template` to `.env`. Fill envirorment variables values.
 
 Execute `pnpm run gen-json-schema`.
+
+- ~~[without relations :(](https://github.com/SpringTree/pg-tables-to-jsonschema/issues/27)~~
+    - implemented foreign keys save to `src/foreign-keys.json` with [postgres.js library](https://github.com/porsager/postgres#connection-details).
 
 ## Get OpenAPI JSON
 
