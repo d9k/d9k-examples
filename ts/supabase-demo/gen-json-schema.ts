@@ -81,6 +81,7 @@ async function genSchema() {
 }
 
 async function genForeignKeys() {
+  // thanks https://stackoverflow.com/a/1152321/1760643
   const queryResult = await sql`
     SELECT
       tc.table_schema,
