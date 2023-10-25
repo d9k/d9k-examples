@@ -7,7 +7,7 @@ pnpm create vite
 # choosed react,
 pnpm install
 pnpm run dev
-pnx storybook init --builder=vite
+pnpm exec storybook init --builder=vite
 pnpm run storybook
 ```
 
