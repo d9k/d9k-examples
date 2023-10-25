@@ -5,12 +5,24 @@ settings:
   excludeLinksFromLockfile: false
 
 devDependencies:
+  '@types/lodash':
+    specifier: ^4.14.200
+    version: 4.14.200
   dotenv:
     specifier: ^16.3.1
     version: 16.3.1
+  install:
+    specifier: ^0.13.0
+    version: 0.13.0
+  lodash:
+    specifier: ^4.17.21
+    version: 4.17.21
   pg-tables-to-jsonschema:
     specifier: ^1.1.2
     version: 1.1.2
+  postgres:
+    specifier: ^3.4.1
+    version: 3.4.1
   supabase:
     specifier: ^1.106.1
     version: 1.106.1
@@ -57,6 +69,10 @@ packages:
 
   /@tsconfig/node16@1.0.4:
     resolution: {integrity: sha512-vxhUy4J8lyeyinH7Azl1pdd43GJhZH/tP2weN8TntQblOY+A0XbT8DJk1/oCPuOOyg/Ja757rG0CgHcWC8OfMA==}
+    dev: true
+
+  /@types/lodash@4.14.200:
+    resolution: {integrity: sha512-YI/M/4HRImtNf3pJgbF+W6FrXovqj+T+/HpENLTooK9PnkacBsDpeP3IpHab40CClUfhNmdM2WTNP2sa2dni5Q==}
     dev: true
 
   /@types/node@20.8.8:
@@ -220,6 +236,11 @@ packages:
   /inflection@1.13.4:
     resolution: {integrity: sha512-6I/HUDeYFfuNCVS3td055BaXBwKYuzw7K3ExVMStBowKo9oOAMJIXIHvdyR3iboTCp1b+1i5DSkIZTcwIktuDw==}
     engines: {'0': node >= 0.4.0}
+    dev: true
+
+  /install@0.13.0:
+    resolution: {integrity: sha512-zDml/jzr2PKU9I8J/xyZBQn8rPCAY//UOYNmR01XwNwyfhEWObo2SWfSl1+0tm1u6PhxLwDnfsT/6jB7OUxqFA==}
+    engines: {node: '>= 0.10'}
     dev: true
 
   /json5@2.2.3:
@@ -431,6 +452,11 @@ packages:
     engines: {node: '>=0.10.0'}
     dependencies:
       xtend: 4.0.2
+    dev: true
+
+  /postgres@3.4.1:
+    resolution: {integrity: sha512-Wasjv6WEzrZXbwKByR2RGD7MBfj7VBqco3hYWz8ifzSAp6tb2L6MlmcKFzkmgV1jT7/vKlcSa+lxXZeTdeVMzQ==}
+    engines: {node: '>=12'}
     dev: true
 
   /prompts@2.4.2:

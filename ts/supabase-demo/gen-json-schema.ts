@@ -1,6 +1,11 @@
-import { config } from 'dotenv';
-
+import postgres from 'postgres'
 import { SchemaConverter } from 'pg-tables-to-jsonschema';
+import { config } from 'dotenv';
+import set from 'lodash/set';
+import * as fs from 'fs';
+
+const outSchemaDir = 'src/db/schema';
+const outForeignKeysPath = 'src/db/foreign-keys.json';
 
 config();
 
@@ -36,27 +41,88 @@ if (!DB_NAME) {
     throw Error('DB_NAME not set');
 }
 
-const converter = new SchemaConverter( {
-    pg: {
-      host: DB_HOST,
-      port: parseInt(DB_PORT, 10),
-      user: DB_USER,
-      password: DB_PASSWORD,
-      database: DB_NAME,
-    },
-    input: {
-      schemas: ['public'],
-      exclude: ['not_this_table'],
-      include: []
-    },
-    output: {
-      additionalProperties: false,
-      baseUrl: 'http://api.localhost.com/schema/',
-      defaultDescription: 'Missing description',
-      indentSpaces: 2,
-      outDir: 'dist/schema',
-      unwrap: false
-    }
-  } );
+const DB_PORT_INT = parseInt(DB_PORT, 10);
 
-console.log(converter.convert());
+const converter = new SchemaConverter( {
+  pg: {
+    host: DB_HOST,
+    port: DB_PORT_INT,
+    user: DB_USER,
+    password: DB_PASSWORD,
+    database: DB_NAME,
+  },
+  input: {
+    schemas: ['public'],
+    exclude: ['not_this_table'],
+    include: []
+  },
+  output: {
+    additionalProperties: false,
+    baseUrl: 'http://api.localhost.com/schema/',
+    defaultDescription: 'Missing description',
+    indentSpaces: 2,
+    outDir: outSchemaDir,
+    unwrap: false
+  }
+} );
+
+const sql = postgres({
+  host                 : DB_HOST,
+  port                 : DB_PORT_INT,
+  database             : DB_NAME,
+  username             : DB_USER,
+  password             : DB_PASSWORD,
+})
+
+async function genSchema() {
+  const result = await converter.convert();
+  return true;
+  // console.log(result);
+}
+
+async function genForeignKeys() {
+  const queryResult = await sql`
+    SELECT
+      tc.table_schema,
+      tc.constraint_name,
+      tc.table_name,
+      kcu.column_name,
+      ccu.table_schema AS foreign_table_schema,
+      ccu.table_name AS foreign_table_name,
+      ccu.column_name AS foreign_column_name
+    FROM information_schema.table_constraints AS tc
+    JOIN information_schema.key_column_usage AS kcu
+      ON tc.constraint_name = kcu.constraint_name
+      AND tc.table_schema = kcu.table_schema
+    JOIN information_schema.constraint_column_usage AS ccu
+      ON ccu.constraint_name = tc.constraint_name
+    WHERE tc.constraint_type = 'FOREIGN KEY'
+    --    AND tc.table_schema='public'
+    --    AND tc.table_name='mytable';
+  `;
+
+  const result = {};
+  queryResult.map(({column_name, table_schema, table_name, ...rest}) => {
+    const valuePath = [table_schema, table_name, column_name];
+    // const value = get(result, valuePath, []);
+    // value.push({...rest});
+    set(result, valuePath, { ...rest});
+  });
+
+  const resultJSON = JSON.stringify(result, null, '  ');
+
+  fs.writeFileSync(outForeignKeysPath, resultJSON);
+
+  return true;
+}
+
+async function main() {
+  const timerToPreventFreeze = setTimeout(() => {}, 999999);
+  await genSchema();
+  await genForeignKeys();
+  clearTimeout(timerToPreventFreeze);
+}
+
+main().then(() => {
+  process.exit()
+});

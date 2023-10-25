@@ -3,8 +3,12 @@
 		"gen-json-schema": "ts-node gen-json-schema.ts"
 	},
 	"devDependencies": {
+		"@types/lodash": "^4.14.200",
 		"dotenv": "^16.3.1",
+		"install": "^0.13.0",
+		"lodash": "^4.17.21",
 		"pg-tables-to-jsonschema": "^1.1.2",
+		"postgres": "^3.4.1",
 		"supabase": "^1.106.1",
 		"ts-node": "^10.9.1"
 	}
