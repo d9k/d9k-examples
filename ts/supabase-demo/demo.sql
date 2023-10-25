@@ -36,5 +36,5 @@ create table teams (
 create table members (
   "sportman_id" int references sportmans,
   "team_id" int references teams,
-  primary key (user_id, team_id)
+  primary key (sportman_id, team_id)
 );

@@ -37,8 +37,27 @@ pnpm exec supabase link --project-ref=<Reference_ID>
 ### Generate typescript types
 
 ```bash
-pnpm exec supabase gen types typescript --linked > supabase/supabase-types.ts
+pnpm exec supabase gen types typescript --linked > src/supabase-types-generated.ts
 ```
+
+See
+
+## Generate schema
+
+- [without relations :(](https://github.com/SpringTree/pg-tables-to-jsonschema/issues/27)
+
+Copy `.env.template` to `.env`. Fill envirorment variables values.
+
+Execute `pnpm run gen-json-schema`.
+
+## Get OpenAPI JSON
+
+Get Project `<API_Key>` from `Settings -> API -> Project API keys -> service_role [Reveal], [Copy]`
+
+`https://<Reference_ID>.supabase.co/rest/v1/?apikey=<API_Key>`
+
+See result at `dist/rest_v1.json`.
+With relations 🙂 (see `definitions.members.properties` section).
 
 ## Development commands
 

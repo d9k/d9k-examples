@@ -1,5 +1,11 @@
 {
+	"scripts": {
+		"gen-json-schema": "ts-node gen-json-schema.ts"
+	},
 	"devDependencies": {
-		"supabase": "^1.106.1"
+		"dotenv": "^16.3.1",
+		"pg-tables-to-jsonschema": "^1.1.2",
+		"supabase": "^1.106.1",
+		"ts-node": "^10.9.1"
 	}
 }

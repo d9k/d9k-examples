@@ -1,0 +1,22 @@
+{
+  "additionalProperties": false,
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "http://api.localhost.com/schema/public/members.json",
+  "title": "members",
+  "description": "Missing description",
+  "properties": {
+    "sportman_id": {
+      "type": "integer",
+      "description": "Missing description. Database type: integer. Default value: null"
+    },
+    "team_id": {
+      "type": "integer",
+      "description": "Missing description. Database type: integer. Default value: null"
+    }
+  },
+  "required": [
+    "sportman_id",
+    "team_id"
+  ],
+  "type": "object"
+}

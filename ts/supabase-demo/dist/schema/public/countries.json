@@ -1,0 +1,22 @@
+{
+  "additionalProperties": false,
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "http://api.localhost.com/schema/public/countries.json",
+  "title": "countries",
+  "description": "Missing description",
+  "properties": {
+    "id": {
+      "type": "integer",
+      "description": "Missing description. Database type: integer. Default value: nextval('countries_id_seq'::regclass)"
+    },
+    "name": {
+      "type": "string",
+      "maxLength": 255,
+      "description": "Missing description. Database type: character varying. Default value: null"
+    }
+  },
+  "required": [
+    "name"
+  ],
+  "type": "object"
+}

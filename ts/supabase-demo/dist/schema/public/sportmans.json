@@ -1,0 +1,19 @@
+{
+  "additionalProperties": false,
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "http://api.localhost.com/schema/public/sportmans.json",
+  "title": "sportmans",
+  "description": "Missing description",
+  "properties": {
+    "id": {
+      "type": "integer",
+      "description": "Missing description. Database type: integer. Default value: nextval('sportmans_id_seq'::regclass)"
+    },
+    "name": {
+      "type": "string",
+      "description": "Missing description. Database type: text. Default value: null"
+    }
+  },
+  "required": [],
+  "type": "object"
+}
