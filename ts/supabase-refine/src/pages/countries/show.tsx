@@ -1,6 +1,6 @@
 import { IResourceComponentsProps } from "@refinedev/core";
-import { HeadlessInferencer } from "@refinedev/inferencer/headless";
+import { MantineInferencer } from "@refinedev/inferencer/mantine";
 
 export const CountriesShow: React.FC<IResourceComponentsProps> = () => {
-    return <HeadlessInferencer />;
+    return <MantineInferencer />;
 };

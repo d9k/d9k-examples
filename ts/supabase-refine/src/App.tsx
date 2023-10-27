@@ -7,7 +7,6 @@ import {
   ErrorComponent,
 } from "@refinedev/core";
 import { DevtoolsPanel, DevtoolsProvider } from "@refinedev/devtools";
-import { RefineKbar, RefineKbarProvider } from "@refinedev/kbar";
 
 import { BrowserRouter, Route, Routes, Outlet } from "react-router-dom";
 import routerBindings, {
@@ -22,12 +21,14 @@ import "./App.css";
 import { supabaseClient } from "./utility";
 import authProvider from "./authProvider";
 import { CountriesCreate, CountriesEdit, CountriesList, CountriesShow } from "./pages/countries";
+import { ThemedLayoutV2 } from "@refinedev/mantine";
+import { MantineProvider } from "@mantine/core";
 
 function App() {
   return (
     <BrowserRouter>
       <GitHubBanner />
-      <RefineKbarProvider>
+      <MantineProvider>
         <DevtoolsProvider>
           <Refine
             dataProvider={dataProvider(supabaseClient)}
@@ -51,23 +52,30 @@ function App() {
               create: "/countries/create",
               edit: "/countries/edit/:id",
               show: "/countries/show/:id"
+            }, {
+              name: "countries",
+              list: "/countries",
+              create: "/countries/create",
+              edit: "/countries/edit/:id",
+              show: "/countries/show/:id"
             }]}>
-            <Routes>
-              <Route index element={<WelcomePage />} />
-              <Route path="/countries">
-                <Route index element={<CountriesList />} />
-                <Route path="create" element={<CountriesCreate />} />
-                <Route path="edit/:id" element={<CountriesEdit />} />
-                <Route path="show/:id" element={<CountriesShow />} />
-              </Route>
-            </Routes>
-            <RefineKbar />
-            <UnsavedChangesNotifier />
-            <DocumentTitleHandler />
+              <ThemedLayoutV2>
+                <Routes>
+                  <Route index element={<WelcomePage />} />
+                  <Route path="/countries">
+                    <Route index element={<CountriesList />} />
+                    <Route path="create" element={<CountriesCreate />} />
+                    <Route path="edit/:id" element={<CountriesEdit />} />
+                    <Route path="show/:id" element={<CountriesShow />} />
+                  </Route>
+                </Routes>
+                <UnsavedChangesNotifier />
+                <DocumentTitleHandler />
+              </ThemedLayoutV2>
           </Refine>
           <DevtoolsPanel />
         </DevtoolsProvider>
-      </RefineKbarProvider>
+      </MantineProvider>
     </BrowserRouter>
   );
 }
