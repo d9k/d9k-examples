@@ -28,13 +28,22 @@ create table sportmans (
   "name" text
 );
 
+INSERT INTO sportmans ("name") VALUES
+	 ('Zabuza');
+
 create table teams (
   "id" serial primary key,
   "team_name" text
 );
+
+INSERT INTO teams (team_name) VALUES
+	 ('Village of the Hidden Mist');
 
 create table members (
   "sportman_id" int references sportmans,
   "team_id" int references teams,
   primary key (sportman_id, team_id)
 );
+
+INSERT INTO members (sportman_id,team_id) VALUES
+	 (1,1);

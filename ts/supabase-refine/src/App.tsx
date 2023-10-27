@@ -20,9 +20,14 @@ import { Layout } from "./components/layout";
 import "./App.css";
 import { supabaseClient } from "./utility";
 import authProvider from "./authProvider";
-import { CountriesCreate, CountriesEdit, CountriesList, CountriesShow } from "./pages/countries";
+
+import { MembersCreate, MembersEdit, MembersList, MembersShow } from "./pages/members";
 import { ThemedLayoutV2 } from "@refinedev/mantine";
 import { MantineProvider } from "@mantine/core";
+import { genCountriesResources, genCountriesRoutes } from "./routes/countries";
+import { genSportmansResources, genSportmansRoutes } from "./routes/sportmans";
+import { genMembersResources, genMembersRoutes } from "./routes/members";
+import { genTeamsResources, genTeamsRoutes } from "./routes/teams";
 
 function App() {
   return (
@@ -40,34 +45,20 @@ function App() {
               warnWhenUnsavedChanges: true,
               projectId: "Ms2TKE-HJmtfS-fOX22k",
             }}
-            resources={[{
-              name: "countries",
-              list: "/countries",
-              create: "/countries/create",
-              edit: "/countries/edit/:id",
-              show: "/countries/show/:id"
-            }, {
-              name: "countries",
-              list: "/countries",
-              create: "/countries/create",
-              edit: "/countries/edit/:id",
-              show: "/countries/show/:id"
-            }, {
-              name: "countries",
-              list: "/countries",
-              create: "/countries/create",
-              edit: "/countries/edit/:id",
-              show: "/countries/show/:id"
-            }]}>
+            resources={[
+              ...genCountriesResources(),
+              ...genMembersResources(),
+              ...genSportmansResources(),
+              ...genTeamsResources(),
+            ]}>
               <ThemedLayoutV2>
                 <Routes>
                   <Route index element={<WelcomePage />} />
-                  <Route path="/countries">
-                    <Route index element={<CountriesList />} />
-                    <Route path="create" element={<CountriesCreate />} />
-                    <Route path="edit/:id" element={<CountriesEdit />} />
-                    <Route path="show/:id" element={<CountriesShow />} />
-                  </Route>
+
+                  {genCountriesRoutes()}
+                  {genMembersRoutes()}
+                  {genSportmansRoutes()}
+                  {genTeamsRoutes()}
                 </Routes>
                 <UnsavedChangesNotifier />
                 <DocumentTitleHandler />

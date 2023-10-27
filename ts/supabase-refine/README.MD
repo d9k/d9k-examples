@@ -1,5 +1,7 @@
 # supabase-refine
 
+See [/ts/supabase-demo/demo.sql](../supabase-demo/demo.sql) for schema.
+
 - From tutorial
   [Use Supabase with refine | Supabase Docs](https://supabase.com/docs/guides/getting-started/quickstarts/refine)
 
@@ -21,6 +23,28 @@ pnpm run dev
 ```
 
 See http://localhost:5173/countries
+
+## Limitation
+
+- Inferencer requires table to have at least one record.
+  - See also [How the fields are inferred | Inferencer | refine doc](https://refine.dev/docs/packages/documentation/inferencer/#how-the-fields-are-inferred)
+- TODO Error on table with foreign keys, http://localhost:5173/members: "Objects are not valid as a React child (found: object with keys {id, team_name}). If you meant to render a collection of children, use an array instead."
+
+## Development
+
+### Generate CRUD page
+
+```
+pnpm run refine create-resource countries
+```
+
+### How mantine packages was installed:
+
+```
+pnp @mantine/core@^5.10.4 @mantine/hooks@^5.10.4 @mantine/form@^5.10.4 @mantine/notifications@^5.10.4 @emotion/react @tabler/icons
+```
+
+See also [issue about Mantine v7 support](https://github.com/refinedev/refine/issues/5178).
 
 # Auto-generated README:
 
