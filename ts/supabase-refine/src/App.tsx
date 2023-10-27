@@ -22,6 +22,7 @@ import "./App.css";
 import { supabaseClient } from "./utility";
 import authProvider from "./authProvider";
 import { CountriesCreate, CountriesEdit, CountriesList, CountriesShow } from "./pages/countries";
+import { MembersCreate, MembersEdit, MembersList, MembersShow } from "./pages/members";
 
 function App() {
   return (
@@ -46,11 +47,11 @@ function App() {
               edit: "/countries/edit/:id",
               show: "/countries/show/:id"
             }, {
-              name: "countries",
-              list: "/countries",
-              create: "/countries/create",
-              edit: "/countries/edit/:id",
-              show: "/countries/show/:id"
+              name: "members",
+              list: "/members",
+              create: "/members/create",
+              edit: "/members/edit/:id",
+              show: "/members/show/:id"
             }]}>
             <Routes>
               <Route index element={<WelcomePage />} />
@@ -59,6 +60,12 @@ function App() {
                 <Route path="create" element={<CountriesCreate />} />
                 <Route path="edit/:id" element={<CountriesEdit />} />
                 <Route path="show/:id" element={<CountriesShow />} />
+              </Route>
+              <Route path="/members">
+                <Route index element={<MembersList />} />
+                <Route path="create" element={<MembersCreate />} />
+                <Route path="edit/:id" element={<MembersEdit />} />
+                <Route path="show/:id" element={<MembersShow />} />
               </Route>
             </Routes>
             <RefineKbar />
