@@ -28,6 +28,7 @@ import { genCountriesResources, genCountriesRoutes } from "./routes/countries";
 import { genSportmansResources, genSportmansRoutes } from "./routes/sportmans";
 import { genMembersResources, genMembersRoutes } from "./routes/members";
 import { genTeamsResources, genTeamsRoutes } from "./routes/teams";
+import { LoginPage, RegisterPage } from "./components/pages/auth/components";
 
 function App() {
   return (
@@ -53,12 +54,24 @@ function App() {
             ]}>
               <ThemedLayoutV2>
                 <Routes>
+
                   <Route index element={<WelcomePage />} />
 
-                  {genCountriesRoutes()}
-                  {genMembersRoutes()}
-                  {genSportmansRoutes()}
-                  {genTeamsRoutes()}
+                  <Route path="/login" element={<LoginPage />} />
+                  <Route path="/register" element={<RegisterPage />} />
+
+                  <Route
+                    element={
+                      <Authenticated fallback={<CatchAllNavigate to="/login" />}>
+                        <Outlet />
+                      </Authenticated>
+                    }
+                  >
+                    {genCountriesRoutes()}
+                    {genMembersRoutes()}
+                    {genSportmansRoutes()}
+                    {genTeamsRoutes()}
+                  </Route>
                 </Routes>
                 <UnsavedChangesNotifier />
                 <DocumentTitleHandler />
