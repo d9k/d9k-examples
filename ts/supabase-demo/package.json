@@ -1,6 +1,7 @@
 {
 	"scripts": {
-		"gen-json-schema": "ts-node gen-json-schema.ts"
+		"gen-json-schema": "ts-node gen-json-schema.ts",
+		"tbls": "ts-node tbls.ts"
 	},
 	"devDependencies": {
 		"@types/lodash": "^4.14.200",

@@ -51,6 +51,14 @@ Execute `pnpm run gen-json-schema`.
 - ~~[without relations :(](https://github.com/SpringTree/pg-tables-to-jsonschema/issues/27)~~
     - implemented foreign keys save to `src/foreign-keys.json` with [postgres.js library](https://github.com/porsager/postgres#connection-details).
 
+## Generate doc & schema with tbls
+
+- [k1LoW/tbls: CI-Friendly tool for document a database, written in Go.](https://github.com/k1LoW/tbls)
+
+```bash
+pnpm run tbls
+```
+
 ## Get OpenAPI JSON
 
 Get Project `<API_Key>` from `Settings -> API -> Project API keys -> service_role [Reveal], [Copy]`
