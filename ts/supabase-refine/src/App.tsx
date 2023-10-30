@@ -16,19 +16,18 @@ import routerBindings, {
   DocumentTitleHandler,
 } from "@refinedev/react-router-v6";
 import { dataProvider, liveProvider } from "@refinedev/supabase";
-import { Layout } from "./components/layout";
+// import { Layout } from "./components/layout";
 import "./App.css";
 import { supabaseClient } from "./utility";
 import authProvider from "./authProvider";
 
-import { MembersCreate, MembersEdit, MembersList, MembersShow } from "./pages/members";
 import { ThemedLayoutV2 } from "@refinedev/mantine";
 import { MantineProvider } from "@mantine/core";
 import { genCountriesResources, genCountriesRoutes } from "./routes/countries";
 import { genSportmansResources, genSportmansRoutes } from "./routes/sportmans";
 import { genMembersResources, genMembersRoutes } from "./routes/members";
 import { genTeamsResources, genTeamsRoutes } from "./routes/teams";
-import { LoginPage, RegisterPage } from "./components/pages/auth/components";
+import { LoginPage, RegisterPage } from "./pages/auth/components";
 
 function App() {
   return (
