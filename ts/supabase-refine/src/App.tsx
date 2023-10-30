@@ -8,6 +8,8 @@ import {
 } from "@refinedev/core";
 import { DevtoolsPanel, DevtoolsProvider } from "@refinedev/devtools";
 
+import { NotificationsProvider } from "@mantine/notifications";
+
 import { BrowserRouter, Route, Routes, Outlet } from "react-router-dom";
 import routerBindings, {
   NavigateToResource,
@@ -21,7 +23,7 @@ import "./App.css";
 import { supabaseClient } from "./utility";
 import authProvider from "./authProvider";
 
-import { ThemedLayoutV2 } from "@refinedev/mantine";
+import { ThemedLayoutV2, notificationProvider } from "@refinedev/mantine";
 import { MantineProvider } from "@mantine/core";
 import { genCountriesResources, genCountriesRoutes } from "./routes/countries";
 import { genSportmansResources, genSportmansRoutes } from "./routes/sportmans";
@@ -35,47 +37,50 @@ function App() {
       <GitHubBanner />
       <MantineProvider>
         <DevtoolsProvider>
-          <Refine
-            dataProvider={dataProvider(supabaseClient)}
-            liveProvider={liveProvider(supabaseClient)}
-            authProvider={authProvider}
-            routerProvider={routerBindings}
-            options={{
-              syncWithLocation: true,
-              warnWhenUnsavedChanges: true,
-              projectId: "Ms2TKE-HJmtfS-fOX22k",
-            }}
-            resources={[
-              ...genCountriesResources(),
-              ...genMembersResources(),
-              ...genSportmansResources(),
-              ...genTeamsResources(),
-            ]}>
-              <ThemedLayoutV2>
-                <Routes>
+          <NotificationsProvider position="top-right">
+            <Refine
+              authProvider={authProvider}
+              dataProvider={dataProvider(supabaseClient)}
+              liveProvider={liveProvider(supabaseClient)}
+              notificationProvider={notificationProvider}
+              options={{
+                syncWithLocation: true,
+                warnWhenUnsavedChanges: true,
+                projectId: "Ms2TKE-HJmtfS-fOX22k",
+              }}
+              routerProvider={routerBindings}
+              resources={[
+                ...genCountriesResources(),
+                ...genMembersResources(),
+                ...genSportmansResources(),
+                ...genTeamsResources(),
+              ]}>
+                <ThemedLayoutV2>
+                  <Routes>
 
-                  <Route index element={<WelcomePage />} />
+                    <Route index element={<WelcomePage />} />
 
-                  <Route path="/login" element={<LoginPage />} />
-                  <Route path="/register" element={<RegisterPage />} />
+                    <Route path="/login" element={<LoginPage />} />
+                    <Route path="/register" element={<RegisterPage />} />
 
-                  <Route
-                    element={
-                      <Authenticated fallback={<CatchAllNavigate to="/login" />}>
-                        <Outlet />
-                      </Authenticated>
-                    }
-                  >
-                    {genCountriesRoutes()}
-                    {genMembersRoutes()}
-                    {genSportmansRoutes()}
-                    {genTeamsRoutes()}
-                  </Route>
-                </Routes>
-                <UnsavedChangesNotifier />
-                <DocumentTitleHandler />
-              </ThemedLayoutV2>
-          </Refine>
+                    <Route
+                      element={
+                        <Authenticated fallback={<CatchAllNavigate to="/login" />}>
+                          <Outlet />
+                        </Authenticated>
+                      }
+                    >
+                      {genCountriesRoutes()}
+                      {genMembersRoutes()}
+                      {genSportmansRoutes()}
+                      {genTeamsRoutes()}
+                    </Route>
+                  </Routes>
+                  <UnsavedChangesNotifier />
+                  <DocumentTitleHandler />
+                </ThemedLayoutV2>
+            </Refine>
+          </NotificationsProvider>
           <DevtoolsPanel />
         </DevtoolsProvider>
       </MantineProvider>
