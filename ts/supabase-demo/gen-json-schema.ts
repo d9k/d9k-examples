@@ -58,8 +58,9 @@ const converter = new SchemaConverter( {
   },
   output: {
     additionalProperties: false,
-    baseUrl: 'http://api.localhost.com/schema/',
-    defaultDescription: 'Missing description',
+    // baseUrl: 'http://api.localhost.com/schema/',
+    // defaultDescription: 'Missing description',
+    defaultDescription: '',
     indentSpaces: 2,
     outDir: outSchemaDir,
     unwrap: false
@@ -119,7 +120,9 @@ async function genForeignKeys() {
 
 async function main() {
   const timerToPreventFreeze = setTimeout(() => {}, 999999);
+  console.log("Schema...");
   await genSchema();
+  console.log("Foreign keys...");
   await genForeignKeys();
   clearTimeout(timerToPreventFreeze);
 }

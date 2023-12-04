@@ -1,6 +1,8 @@
 {
 	"scripts": {
+		"gen-typescript-types": "pnpm exec supabase gen types typescript --linked > src/db/types.generated.ts",
 		"gen-json-schema": "ts-node gen-json-schema.ts",
+		"deprecated-parse-supabase-generated-types-with-typescript-parser": "ts-node deprecated-parse-supabase-generated-types-with-typescript-parser.ts",
 		"tbls": "ts-node tbls.ts"
 	},
 	"devDependencies": {
@@ -11,6 +13,9 @@
 		"pg-tables-to-jsonschema": "^1.1.2",
 		"postgres": "^3.4.1",
 		"supabase": "^1.106.1",
-		"ts-node": "^10.9.1"
+		"ts-file-parser": "^0.0.21",
+		"ts-node": "^10.9.1",
+		"typescript": "^3.0.3",
+		"typescript-parser": "^2.6.1"
 	}
 }
