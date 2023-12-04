@@ -18,7 +18,7 @@ async function main() {
 
     // const parsed = parseStruct(source, {}, supabaseGeneratedTypesPath);
     // console.log(parsed);
-    console.log(`Writing raw types to "${supabaseParsedRawTypesPath}"`);
+    console.log(`Writing raw parsed types to "${supabaseParsedRawTypesPath}"`);
     fs.writeFileSync(supabaseParsedRawTypesPath, JSON.stringify(parsed, null, '  '));
 
     parsed.declarations = await Promise.all(parsed.declarations.map(async (declaration) => {
@@ -32,7 +32,7 @@ async function main() {
                 let _typeParsed;
 
                 if (type[0] == '{') {
-                    const manualParseTypeName = `ManualParse{upperFirst(name)}`;
+                    const manualParseTypeName = `ManualParse ${upperFirst(name)}`;
                     // const manualParseDeclarationPrefix = `type ${manualParseTypeName} = `;
                     const manualParseDeclarationPrefix = `interface ${manualParseTypeName} `;
                     const manualParseDeclarationSuffix = `;`;
@@ -51,6 +51,7 @@ async function main() {
         return declaration;
     }))
 
+    console.log(`Writing parsed types to "${supabaseParsedTypesPath}"`);
     fs.writeFileSync(supabaseParsedTypesPath, JSON.stringify(parsed, null, '  '));
 }
 
