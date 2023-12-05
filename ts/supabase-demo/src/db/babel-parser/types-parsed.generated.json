@@ -1,0 +1,15 @@
+{
+  "public": {
+    "countries": {},
+    "members": {},
+    "movies": {},
+    "profiles": {},
+    "sportmans": {},
+    "teams": {}
+  },
+  "storage": {
+    "buckets": {},
+    "migrations": {},
+    "objects": {}
+  }
+}

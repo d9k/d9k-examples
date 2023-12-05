@@ -3,11 +3,13 @@
 import * as fs from 'fs';
 import { parse } from "@babel/parser";
 import traverse, { Node, NodePath, Visitor } from "@babel/traverse";
-import { StringNullableChain } from 'lodash';
+import { set } from 'lodash';
+import { BabelTraverseHelper } from './src/lib/babel/traverse-helper';
 
 const supabaseGeneratedTypesPath = 'src/db/types.generated.ts';
 
 const supabaseRawParsedTypesPath = 'src/db/babel-parser/types-raw-parsed.generated.json';
+const supabaseSchemaJsonPath = 'src/db/babel-parser/types-parsed.generated.json';
 
 const source = fs.readFileSync(supabaseGeneratedTypesPath).toString();
 
@@ -31,7 +33,7 @@ const getCode = <P extends Node,>(path: NodePath<P>) => {
     }
 }
 
-let pathDatabaseBody: NodePath;
+// let pathDatabaseBody: NodePath;
 // let pathDatabasePublic: NodePath;
 
 type DatabaseTableProperty = {
@@ -50,20 +52,77 @@ type DatabaseTable = {
 type DatabaseSchema = {[tableName: string]: DatabaseTable};
 type DatabaseStructure = {[schemaName: string]: DatabaseSchema};
 
-const databaseSchema: DatabaseStructure = {};
+const result: DatabaseStructure = {};
 
-const visitDatabaseChild: Visitor = {
+const traverseHelperDatabaseSchemas = new BabelTraverseHelper({maxLevel: 1});
+const traverseHelperDatabaseSchemaSections = new BabelTraverseHelper({maxLevel: 1});
+const traverseHelperDatabaseSchemaTables = new BabelTraverseHelper({maxLevel: 1});
+const traverseHelperDatabaseSchemaTablesSections = new BabelTraverseHelper({maxLevel: 1});
+
+let currentSchemaName = '';
+let currentTableName = '';
+
+
+const visitDatabaseSchemasTablesSections: Visitor = {
     TSPropertySignature(path) {
         const { node, parentPath } = path;
+
+        currentTableName = (node.key as any).name;
+
+        traverseHelperDatabaseSchemaTables.process(path);
+
+        const resultPath = [currentSchemaName, currentTableName]
+
+        set(result, resultPath, {})
+    }
+}
+
+const visitDatabaseSchemasTables: Visitor = {
+    TSPropertySignature(path) {
+        const { node, parentPath } = path;
+
+        currentTableName = (node.key as any).name;
+
+        traverseHelperDatabaseSchemaTables.process(path);
+
+        const resultPath = [currentSchemaName, currentTableName]
+
+        set(result, resultPath, {})
+    }
+}
+
+const visitDatabaseSchemasSection: Visitor = {
+    TSPropertySignature(path) {
+    // enter(path) {
+        const { node, parentPath } = path;
+
         const name = (node.key as any).name;
 
-        if (parentPath !== pathDatabaseBody || name === 'graphql_public') {
-            path.skip();
+        traverseHelperDatabaseSchemaSections.process(path);
+
+        if (name === 'Tables') {
+            traverseHelperDatabaseSchemaTables.reset();
+            path.traverse(visitDatabaseSchemasTables);
+        }
+    }
+}
+
+const visitDatabaseSchemas: Visitor = {
+    TSPropertySignature(path) {
+        const { node, parentPath } = path;
+        currentSchemaName = (node.key as any).name;
+
+        traverseHelperDatabaseSchemas.process(path);
+
+        // parentPath !== pathDatabaseBody ||
+        if (currentSchemaName === 'graphql_public') {
             return;
         }
 
-        databaseSchema[name] = {};
-        path.skip();
+        result[currentSchemaName] = {};
+
+        traverseHelperDatabaseSchemaSections.reset();
+        path.traverse(visitDatabaseSchemasSection);
     }
 }
 
@@ -76,40 +135,15 @@ traverse(parsed, {
         // });
         if (name === 'Database') {
             // console.log('interface:', getCode(path));
-            pathDatabaseBody = path.get('body') as NodePath;
-            path.traverse(visitDatabaseChild);
-
-            // path.traverse()
+            // pathDatabaseBody = path.get('body') as NodePath;
+            traverseHelperDatabaseSchemas.reset();
+            path.traverse(visitDatabaseSchemas);
         }
     },
-    // enter(path, state) {
-    //     const { node } = path;
-    //     const { start, end } = node;
-    //     // const { code } = state.file
-    //     // if (path.isIdentifier({ name: "n" })) {
-    //     //     path.node.name = "x";
-    //     // }
-    //     // console.log(code.slice(node.start, node.end))
-    //     // console.log(path.toString());
-
-    //     if (start && end) {
-    //         const code = source.slice(start, end);
-    //         console.log(code)
-    //     }
-
-    //     path.traverse
-
-    //     console.log();
-    // },
-    // enter(path) {
-    //     if (path.isIdentifier({ name: "n" })) {
-    //       path.node.name = "x";
-    //     }
-    //   },
-    // FunctionDeclaration: function(path) {
-    //   path.node.id.name = "x";
-    // },
 });
 
-console.log(`Writing parsed types to "${supabaseRawParsedTypesPath}"`);
+console.log(`Writing parsed raw types to "${supabaseRawParsedTypesPath}"`);
 fs.writeFileSync(supabaseRawParsedTypesPath, JSON.stringify(parsed, null, '  '));
+
+console.log(`Writing schema to "${supabaseSchemaJsonPath}"`);
+fs.writeFileSync(supabaseSchemaJsonPath, JSON.stringify(result, null, '  '));
