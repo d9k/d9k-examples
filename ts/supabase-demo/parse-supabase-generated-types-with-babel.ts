@@ -1,10 +1,13 @@
 /** https://github.com/babel/babel/discussions/14578#discussioncomment-2810253 */
 // TODO
 import * as fs from 'fs';
-import { parse } from "@babel/parser";
-import traverse, { Node, NodePath, Visitor } from "@babel/traverse";
-import { set } from 'lodash';
+import { TSPropertySignature } from '@babel/types';
+import { parse } from '@babel/parser';
+import traverse, { Node, NodePath, Visitor } from '@babel/traverse';
+import set from 'lodash/set';
 import { BabelTraverseHelper } from './src/lib/babel/traverse-helper';
+
+import jsonLoose from 'json-loose'
 
 const supabaseGeneratedTypesPath = 'src/db/types.generated.ts';
 
@@ -24,84 +27,159 @@ const parsed = parse(source, {
     ]
 });
 
-const getCode = <P extends Node,>(path: NodePath<P>) => {
-    const { node } = path;
-    const { start, end } = node;
+// const getCode = <P extends Node,>(path: NodePath<P>) => {
+//     const { node } = path;
+//     const { start, end } = node;
 
-    if (start && end) {
-        return source.slice(start, end);
-    }
+//     if (start && end) {
+//         return source.slice(start, end);
+//     }
+// }
+
+type SupabaseRelationInfo = {
+    columns: string[];
+    foreignKeyName: string;
+    isOneToOne: boolean;
+    referencedColumns: string[];
+    referencedRelation: string;
 }
 
-// let pathDatabaseBody: NodePath;
-// let pathDatabasePublic: NodePath;
+type DbFieldFkInfo = {
+    fkName: string;
+    foreignSchema?: string;
+    foreignTable: string;
+    foreignField: string;
+    isOneToOne: boolean;
+}
 
-type DatabaseTableProperty = {
-    description: string;
+type DbFieldInfo = {
+    description?: string;
     name: string;
     type: string;
     nullable: boolean;
-    foreignSchema?: string;
-    foreignTable?: string;
+    fkInfo?: DbFieldFkInfo;
 }
 
-type DatabaseTable = {
-    properties: DatabaseTableProperty[];
+type DbTable = {
+    properties: DbFieldInfo[];
 }
 
-type DatabaseSchema = {[tableName: string]: DatabaseTable};
-type DatabaseStructure = {[schemaName: string]: DatabaseSchema};
+type DbSchema = {[tableName: string]: DbTable};
+type DbStructure = {[schemaName: string]: DbSchema};
 
-const result: DatabaseStructure = {};
+const result: DbStructure = {};
 
-const traverseHelperDatabaseSchemas = new BabelTraverseHelper({maxLevel: 1});
-const traverseHelperDatabaseSchemaSections = new BabelTraverseHelper({maxLevel: 1});
-const traverseHelperDatabaseSchemaTables = new BabelTraverseHelper({maxLevel: 1});
-const traverseHelperDatabaseSchemaTablesSections = new BabelTraverseHelper({maxLevel: 1});
+const traverseHelperDbSchemas = new BabelTraverseHelper({maxLevel: 1});
+const traverseHelperDbSchemaSections = new BabelTraverseHelper({maxLevel: 1});
+const traverseHelperDbTables = new BabelTraverseHelper({maxLevel: 1});
+const traverseHelperDbTablesSections = new BabelTraverseHelper({maxLevel: 1});
+const traverseHelperDbTablesFields = new BabelTraverseHelper({maxLevel: 1});
 
 let currentSchemaName = '';
 let currentTableName = '';
+let currentTableRelationsInfo: SupabaseRelationInfo[] = [];
 
-
-const visitDatabaseSchemasTablesSections: Visitor = {
+const visitDbTablesFields: Visitor = {
+    // TSPropertySignature(path) {
     TSPropertySignature(path) {
         const { node, parentPath } = path;
 
-        currentTableName = (node.key as any).name;
+        const fieldName = (node.key as any).name;
 
-        traverseHelperDatabaseSchemaTables.process(path);
+        const resultPath = [currentSchemaName, currentTableName, fieldName];
 
-        const resultPath = [currentSchemaName, currentTableName]
+        const typeString = `${path.get('typeAnnotation.typeAnnotation')}`
 
-        set(result, resultPath, {})
+        const typeParts = typeString.split(/[ ]*\|[ ]*/g);
+
+        traverseHelperDbTablesFields.process(path);
+
+        const fieldInfo: DbFieldInfo = {
+            name: fieldName,
+            nullable: false,
+            type: '',
+        }
+
+        typeParts.forEach((typePart) => {
+            if (typePart === 'null') {
+                fieldInfo.nullable = true;
+            } else {
+                fieldInfo.type = typePart;
+            }
+        })
+
+        set(result, resultPath, fieldInfo);
+    }
+}
+
+const visitDbTablesSections: Visitor = {
+    TSPropertySignature(path) {
+        const { node } = path;
+
+        const sectionName = (node.key as any).name;
+        traverseHelperDbTablesSections.process(path);
+
+        switch (sectionName) {
+            case 'Row':
+                traverseHelperDbTablesFields.reset();
+                path.traverse(visitDbTablesFields);
+                break;
+            case 'Relationships':
+                const relationsString = `${path.get('typeAnnotation.typeAnnotation')}`;
+                const jsonEncodedRelationsBroken = relationsString.replace(/;$/gm, ',');
+                const jsonEncodedRelations = jsonLoose(jsonEncodedRelationsBroken);
+                currentTableRelationsInfo = JSON.parse(jsonEncodedRelations);
+                break;
+        }
     }
 }
 
 const visitDatabaseSchemasTables: Visitor = {
     TSPropertySignature(path) {
-        const { node, parentPath } = path;
+        const { node } = path;
 
         currentTableName = (node.key as any).name;
 
-        traverseHelperDatabaseSchemaTables.process(path);
+        traverseHelperDbTables.process(path);
 
         const resultPath = [currentSchemaName, currentTableName]
-
         set(result, resultPath, {})
+
+        currentTableRelationsInfo = [];
+        traverseHelperDbTablesSections.reset();
+        path.traverse(visitDbTablesSections);
+        currentTableRelationsInfo.forEach((relationInfo) => {
+            const {columns, foreignKeyName, isOneToOne, referencedColumns, referencedRelation} = relationInfo;
+
+            for (let i = 0; i < columns.length; i ++) {
+                const column = columns[i];
+                const referencedColumn = referencedColumns[i];
+
+                const fkResultPath = [currentSchemaName, currentTableName, column, 'fkInfo']
+
+                const fkInfo: DbFieldFkInfo = {
+                    foreignField: referencedColumn,
+                    fkName: foreignKeyName,
+                    isOneToOne,
+                    foreignTable: referencedRelation,
+                }
+
+                set(result, fkResultPath, fkInfo);
+            }
+        })
     }
 }
 
 const visitDatabaseSchemasSection: Visitor = {
     TSPropertySignature(path) {
-    // enter(path) {
-        const { node, parentPath } = path;
+        const { node } = path;
 
         const name = (node.key as any).name;
 
-        traverseHelperDatabaseSchemaSections.process(path);
+        traverseHelperDbSchemaSections.process(path);
 
         if (name === 'Tables') {
-            traverseHelperDatabaseSchemaTables.reset();
+            traverseHelperDbTables.reset();
             path.traverse(visitDatabaseSchemasTables);
         }
     }
@@ -112,16 +190,15 @@ const visitDatabaseSchemas: Visitor = {
         const { node, parentPath } = path;
         currentSchemaName = (node.key as any).name;
 
-        traverseHelperDatabaseSchemas.process(path);
+        traverseHelperDbSchemas.process(path);
 
-        // parentPath !== pathDatabaseBody ||
         if (currentSchemaName === 'graphql_public') {
             return;
         }
 
         result[currentSchemaName] = {};
 
-        traverseHelperDatabaseSchemaSections.reset();
+        traverseHelperDbSchemaSections.reset();
         path.traverse(visitDatabaseSchemasSection);
     }
 }
@@ -130,13 +207,8 @@ traverse(parsed, {
     TSInterfaceDeclaration(path) {
         const {node } = path;
         const {id: {name}} = node;
-        // const childrenNodes = node.body.body.forEach((node) => {
-        //     const name = node.id.name;
-        // });
         if (name === 'Database') {
-            // console.log('interface:', getCode(path));
-            // pathDatabaseBody = path.get('body') as NodePath;
-            traverseHelperDatabaseSchemas.reset();
+            traverseHelperDbSchemas.reset();
             path.traverse(visitDatabaseSchemas);
         }
     },

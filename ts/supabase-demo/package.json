@@ -1,26 +1,27 @@
 {
 	"scripts": {
-		"gen-typescript-types": "pnpm exec supabase gen types typescript --linked > src/db/types.generated.ts",
-		"gen-json-schema": "ts-node gen-json-schema.ts",
-		"deprecated-parse-supabase-generated-types-with-typescript-parser": "pnpm exec ts-node deprecated-parse-supabase-generated-types-with-typescript-parser.ts",
-		"parse-supabase-generated-types-with-babel": "pnpm exec ts-node parse-supabase-generated-types-with-babel.ts",
-		"tbls": "ts-node tbls.ts"
+		"gen-typescript-types": "supabase gen types typescript --linked > src/db/types.generated.ts",
+		"gen-json-schema": "tsx gen-json-schema.ts",
+		"deprecated-parse-supabase-generated-types-with-typescript-parser": "tsx deprecated-parse-supabase-generated-types-with-typescript-parser.ts",
+		"parse-supabase-generated-types-with-babel": "tsx parse-supabase-generated-types-with-babel.ts",
+		"tbls": "tsx tbls.ts"
 	},
 	"devDependencies": {
 		"@babel/parser": "^7.23.5",
 		"@babel/traverse": "^7.23.5",
+		"@babel/types": "^7.23.5",
 		"@types/babel__traverse": "^7.20.4",
 		"@types/lodash": "^4.14.200",
 		"@types/node": "^20.10.3",
 		"dotenv": "^16.3.1",
 		"install": "^0.13.0",
+		"json-loose": "^1.2.2",
 		"lodash": "^4.17.21",
 		"pg-tables-to-jsonschema": "^1.1.2",
 		"postgres": "^3.4.1",
 		"supabase": "^1.106.1",
 		"ts-file-parser": "^0.0.21",
-		"ts-node": "^10.9.1",
-		"ts-node-dev": "^2.0.0",
+		"tsx": "^4.6.2",
 		"typescript": "^3.0.3",
 		"typescript-parser": "^2.6.1"
 	}

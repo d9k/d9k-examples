@@ -1,15 +1,258 @@
 {
   "public": {
-    "countries": {},
-    "members": {},
-    "movies": {},
-    "profiles": {},
-    "sportmans": {},
-    "teams": {}
+    "countries": {
+      "id": {
+        "name": "id",
+        "nullable": false,
+        "type": "number"
+      },
+      "name": {
+        "name": "name",
+        "nullable": false,
+        "type": "string"
+      }
+    },
+    "members": {
+      "sportman_id": {
+        "name": "sportman_id",
+        "nullable": false,
+        "type": "number",
+        "fkInfo": {
+          "foreignField": "id",
+          "fkName": "members_sportman_id_fkey",
+          "isOneToOne": false,
+          "foreignTable": "sportmans"
+        }
+      },
+      "team_id": {
+        "name": "team_id",
+        "nullable": false,
+        "type": "number",
+        "fkInfo": {
+          "foreignField": "id",
+          "fkName": "members_team_id_fkey",
+          "isOneToOne": false,
+          "foreignTable": "teams"
+        }
+      }
+    },
+    "movies": {
+      "data": {
+        "name": "data",
+        "nullable": true,
+        "type": "Json"
+      },
+      "id": {
+        "name": "id",
+        "nullable": false,
+        "type": "number"
+      },
+      "name": {
+        "name": "name",
+        "nullable": false,
+        "type": "string"
+      }
+    },
+    "profiles": {
+      "avatar_url": {
+        "name": "avatar_url",
+        "nullable": true,
+        "type": "string"
+      },
+      "full_name": {
+        "name": "full_name",
+        "nullable": true,
+        "type": "string"
+      },
+      "id": {
+        "name": "id",
+        "nullable": false,
+        "type": "string",
+        "fkInfo": {
+          "foreignField": "id",
+          "fkName": "profiles_id_fkey",
+          "isOneToOne": true,
+          "foreignTable": "users"
+        }
+      },
+      "updated_at": {
+        "name": "updated_at",
+        "nullable": true,
+        "type": "string"
+      },
+      "username": {
+        "name": "username",
+        "nullable": true,
+        "type": "string"
+      },
+      "website": {
+        "name": "website",
+        "nullable": true,
+        "type": "string"
+      }
+    },
+    "sportmans": {
+      "id": {
+        "name": "id",
+        "nullable": false,
+        "type": "number"
+      },
+      "name": {
+        "name": "name",
+        "nullable": true,
+        "type": "string"
+      }
+    },
+    "teams": {
+      "id": {
+        "name": "id",
+        "nullable": false,
+        "type": "number"
+      },
+      "team_name": {
+        "name": "team_name",
+        "nullable": true,
+        "type": "string"
+      }
+    }
   },
   "storage": {
-    "buckets": {},
-    "migrations": {},
-    "objects": {}
+    "buckets": {
+      "allowed_mime_types": {
+        "name": "allowed_mime_types",
+        "nullable": true,
+        "type": "string[]"
+      },
+      "avif_autodetection": {
+        "name": "avif_autodetection",
+        "nullable": true,
+        "type": "boolean"
+      },
+      "created_at": {
+        "name": "created_at",
+        "nullable": true,
+        "type": "string"
+      },
+      "file_size_limit": {
+        "name": "file_size_limit",
+        "nullable": true,
+        "type": "number"
+      },
+      "id": {
+        "name": "id",
+        "nullable": false,
+        "type": "string"
+      },
+      "name": {
+        "name": "name",
+        "nullable": false,
+        "type": "string"
+      },
+      "owner": {
+        "name": "owner",
+        "nullable": true,
+        "type": "string"
+      },
+      "owner_id": {
+        "name": "owner_id",
+        "nullable": true,
+        "type": "string"
+      },
+      "public": {
+        "name": "public",
+        "nullable": true,
+        "type": "boolean"
+      },
+      "updated_at": {
+        "name": "updated_at",
+        "nullable": true,
+        "type": "string"
+      }
+    },
+    "migrations": {
+      "executed_at": {
+        "name": "executed_at",
+        "nullable": true,
+        "type": "string"
+      },
+      "hash": {
+        "name": "hash",
+        "nullable": false,
+        "type": "string"
+      },
+      "id": {
+        "name": "id",
+        "nullable": false,
+        "type": "number"
+      },
+      "name": {
+        "name": "name",
+        "nullable": false,
+        "type": "string"
+      }
+    },
+    "objects": {
+      "bucket_id": {
+        "name": "bucket_id",
+        "nullable": true,
+        "type": "string",
+        "fkInfo": {
+          "foreignField": "id",
+          "fkName": "objects_bucketId_fkey",
+          "isOneToOne": false,
+          "foreignTable": "buckets"
+        }
+      },
+      "created_at": {
+        "name": "created_at",
+        "nullable": true,
+        "type": "string"
+      },
+      "id": {
+        "name": "id",
+        "nullable": false,
+        "type": "string"
+      },
+      "last_accessed_at": {
+        "name": "last_accessed_at",
+        "nullable": true,
+        "type": "string"
+      },
+      "metadata": {
+        "name": "metadata",
+        "nullable": true,
+        "type": "Json"
+      },
+      "name": {
+        "name": "name",
+        "nullable": true,
+        "type": "string"
+      },
+      "owner": {
+        "name": "owner",
+        "nullable": true,
+        "type": "string"
+      },
+      "owner_id": {
+        "name": "owner_id",
+        "nullable": true,
+        "type": "string"
+      },
+      "path_tokens": {
+        "name": "path_tokens",
+        "nullable": true,
+        "type": "string[]"
+      },
+      "updated_at": {
+        "name": "updated_at",
+        "nullable": true,
+        "type": "string"
+      },
+      "version": {
+        "name": "version",
+        "nullable": true,
+        "type": "string"
+      }
+    }
   }
 }
