@@ -19,16 +19,16 @@ Auth: Manages SSO email address domain mapping to an SSO Identity Provider.
 | Name | Type | Definition |
 | ---- | ---- | ---------- |
 | domain not empty | CHECK | CHECK ((char_length(domain) > 0)) |
-| sso_domains_sso_provider_id_fkey | FOREIGN KEY | FOREIGN KEY (sso_provider_id) REFERENCES auth.sso_providers(id) ON DELETE CASCADE |
 | sso_domains_pkey | PRIMARY KEY | PRIMARY KEY (id) |
+| sso_domains_sso_provider_id_fkey | FOREIGN KEY | FOREIGN KEY (sso_provider_id) REFERENCES auth.sso_providers(id) ON DELETE CASCADE |
 
 ## Indexes
 
 | Name | Definition |
 | ---- | ---------- |
 | sso_domains_pkey | CREATE UNIQUE INDEX sso_domains_pkey ON auth.sso_domains USING btree (id) |
-| sso_domains_sso_provider_id_idx | CREATE INDEX sso_domains_sso_provider_id_idx ON auth.sso_domains USING btree (sso_provider_id) |
 | sso_domains_domain_idx | CREATE UNIQUE INDEX sso_domains_domain_idx ON auth.sso_domains USING btree (lower(domain)) |
+| sso_domains_sso_provider_id_idx | CREATE INDEX sso_domains_sso_provider_id_idx ON auth.sso_domains USING btree (sso_provider_id) |
 
 ## Relations
 

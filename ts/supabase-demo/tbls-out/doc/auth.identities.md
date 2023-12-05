@@ -21,16 +21,16 @@ Auth: Stores identities associated to a user.
 
 | Name | Type | Definition |
 | ---- | ---- | ---------- |
-| identities_user_id_fkey | FOREIGN KEY | FOREIGN KEY (user_id) REFERENCES auth.users(id) ON DELETE CASCADE |
 | identities_pkey | PRIMARY KEY | PRIMARY KEY (provider, id) |
+| identities_user_id_fkey | FOREIGN KEY | FOREIGN KEY (user_id) REFERENCES auth.users(id) ON DELETE CASCADE |
 
 ## Indexes
 
 | Name | Definition | Comment |
 | ---- | ---------- | ------- |
 | identities_pkey | CREATE UNIQUE INDEX identities_pkey ON auth.identities USING btree (provider, id) |  |
-| identities_user_id_idx | CREATE INDEX identities_user_id_idx ON auth.identities USING btree (user_id) |  |
 | identities_email_idx | CREATE INDEX identities_email_idx ON auth.identities USING btree (email text_pattern_ops) | Auth: Ensures indexed queries on the email column |
+| identities_user_id_idx | CREATE INDEX identities_user_id_idx ON auth.identities USING btree (user_id) |  |
 
 ## Relations
 

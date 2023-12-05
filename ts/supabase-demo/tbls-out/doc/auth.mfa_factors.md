@@ -21,16 +21,16 @@ auth: stores metadata about factors
 
 | Name | Type | Definition |
 | ---- | ---- | ---------- |
-| mfa_factors_user_id_fkey | FOREIGN KEY | FOREIGN KEY (user_id) REFERENCES auth.users(id) ON DELETE CASCADE |
 | mfa_factors_pkey | PRIMARY KEY | PRIMARY KEY (id) |
+| mfa_factors_user_id_fkey | FOREIGN KEY | FOREIGN KEY (user_id) REFERENCES auth.users(id) ON DELETE CASCADE |
 
 ## Indexes
 
 | Name | Definition |
 | ---- | ---------- |
 | mfa_factors_pkey | CREATE UNIQUE INDEX mfa_factors_pkey ON auth.mfa_factors USING btree (id) |
-| mfa_factors_user_friendly_name_unique | CREATE UNIQUE INDEX mfa_factors_user_friendly_name_unique ON auth.mfa_factors USING btree (friendly_name, user_id) WHERE (TRIM(BOTH FROM friendly_name) <> ''::text) |
 | factor_id_created_at_idx | CREATE INDEX factor_id_created_at_idx ON auth.mfa_factors USING btree (user_id, created_at) |
+| mfa_factors_user_friendly_name_unique | CREATE UNIQUE INDEX mfa_factors_user_friendly_name_unique ON auth.mfa_factors USING btree (friendly_name, user_id) WHERE (TRIM(BOTH FROM friendly_name) <> ''::text) |
 | mfa_factors_user_id_idx | CREATE INDEX mfa_factors_user_id_idx ON auth.mfa_factors USING btree (user_id) |
 
 ## Relations

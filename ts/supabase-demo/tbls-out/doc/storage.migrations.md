@@ -15,15 +15,15 @@
 
 | Name | Type | Definition |
 | ---- | ---- | ---------- |
-| migrations_pkey | PRIMARY KEY | PRIMARY KEY (id) |
 | migrations_name_key | UNIQUE | UNIQUE (name) |
+| migrations_pkey | PRIMARY KEY | PRIMARY KEY (id) |
 
 ## Indexes
 
 | Name | Definition |
 | ---- | ---------- |
-| migrations_pkey | CREATE UNIQUE INDEX migrations_pkey ON storage.migrations USING btree (id) |
 | migrations_name_key | CREATE UNIQUE INDEX migrations_name_key ON storage.migrations USING btree (name) |
+| migrations_pkey | CREATE UNIQUE INDEX migrations_pkey ON storage.migrations USING btree (id) |
 
 ## Relations
 

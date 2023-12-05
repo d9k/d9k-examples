@@ -7,7 +7,7 @@
 | Name | Type | Default | Nullable | Children | Parents | Comment |
 | ---- | ---- | ------- | -------- | -------- | ------- | ------- |
 | id | integer | nextval('countries_id_seq'::regclass) | false |  |  |  |
-| name | varchar(255) |  | false |  |  |  |
+| name | varchar(255) |  | false |  |  | english name |
 
 ## Constraints
 

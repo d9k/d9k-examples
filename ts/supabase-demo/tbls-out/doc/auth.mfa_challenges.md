@@ -18,8 +18,8 @@ auth: stores metadata about challenge requests made
 
 | Name | Type | Definition |
 | ---- | ---- | ---------- |
-| mfa_challenges_auth_factor_id_fkey | FOREIGN KEY | FOREIGN KEY (factor_id) REFERENCES auth.mfa_factors(id) ON DELETE CASCADE |
 | mfa_challenges_pkey | PRIMARY KEY | PRIMARY KEY (id) |
+| mfa_challenges_auth_factor_id_fkey | FOREIGN KEY | FOREIGN KEY (factor_id) REFERENCES auth.mfa_factors(id) ON DELETE CASCADE |
 
 ## Indexes
 

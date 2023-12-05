@@ -31,9 +31,9 @@ stores metadata for pkce logins
 | Name | Definition |
 | ---- | ---------- |
 | flow_state_pkey | CREATE UNIQUE INDEX flow_state_pkey ON auth.flow_state USING btree (id) |
+| flow_state_created_at_idx | CREATE INDEX flow_state_created_at_idx ON auth.flow_state USING btree (created_at DESC) |
 | idx_auth_code | CREATE INDEX idx_auth_code ON auth.flow_state USING btree (auth_code) |
 | idx_user_id_auth_method | CREATE INDEX idx_user_id_auth_method ON auth.flow_state USING btree (user_id, authentication_method) |
-| flow_state_created_at_idx | CREATE INDEX flow_state_created_at_idx ON auth.flow_state USING btree (created_at DESC) |
 
 ## Relations
 

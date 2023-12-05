@@ -41,31 +41,41 @@ console.log(connectionString);
 
 const execOptions: CommonExecOptions = {stdio: 'inherit'};
 
-console.log('Updating JSON schema');
+async function main() {
+    const timerToPreventFreeze = setTimeout(() => {}, 999999);
 
-execFileSync(
-    'tbls',
-    [
-        'out',
-        '-t',
-        'json',
-        '-o',
-        'tbls-out/schema.json',
-        connectionString
-    ],
-    execOptions
-);
+    console.log('Updating JSON schema');
 
-console.log('Updating doc');
+    execFileSync(
+        'tbls',
+        [
+            'out',
+            '-t',
+            'json',
+            '-o',
+            'tbls-out/schema.json',
+            connectionString
+        ],
+        execOptions
+    );
 
-execFileSync(
-    'tbls',
-    [
-        'doc',
-        // '-o',
-        // 'tbls-out/doc',
-        '--rm-dist',
-        connectionString
-    ],
-    execOptions
-);
+    console.log('Updating doc');
+
+    execFileSync(
+        'tbls',
+        [
+            'doc',
+            // '-o',
+            // 'tbls-out/doc',
+            '--rm-dist',
+            connectionString
+        ],
+        execOptions
+    );
+
+    clearTimeout(timerToPreventFreeze);
+}
+
+main().then(() => {
+    process.exit()
+});

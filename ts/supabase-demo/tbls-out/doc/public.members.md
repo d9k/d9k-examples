@@ -13,9 +13,9 @@
 
 | Name | Type | Definition |
 | ---- | ---- | ---------- |
+| members_pkey | PRIMARY KEY | PRIMARY KEY (sportman_id, team_id) |
 | members_sportman_id_fkey | FOREIGN KEY | FOREIGN KEY (sportman_id) REFERENCES sportmans(id) |
 | members_team_id_fkey | FOREIGN KEY | FOREIGN KEY (team_id) REFERENCES teams(id) |
-| members_pkey | PRIMARY KEY | PRIMARY KEY (sportman_id, team_id) |
 
 ## Indexes
 

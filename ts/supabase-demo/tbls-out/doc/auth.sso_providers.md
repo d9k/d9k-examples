@@ -8,7 +8,7 @@ Auth: Manages SSO identity provider information; see saml_providers for SAML.
 
 | Name | Type | Default | Nullable | Children | Parents | Comment |
 | ---- | ---- | ------- | -------- | -------- | ------- | ------- |
-| id | uuid |  | false | [auth.sso_domains](auth.sso_domains.md) [auth.saml_providers](auth.saml_providers.md) [auth.saml_relay_states](auth.saml_relay_states.md) |  |  |
+| id | uuid |  | false | [auth.saml_providers](auth.saml_providers.md) [auth.saml_relay_states](auth.saml_relay_states.md) [auth.sso_domains](auth.sso_domains.md) |  |  |
 | resource_id | text |  | true |  |  | Auth: Uniquely identifies a SSO provider according to a user-chosen resource ID (case insensitive), useful in infrastructure as code. |
 | created_at | timestamp with time zone |  | true |  |  |  |
 | updated_at | timestamp with time zone |  | true |  |  |  |

@@ -18,16 +18,16 @@ auth: stores authenticator method reference claims for multi factor authenticati
 
 | Name | Type | Definition |
 | ---- | ---- | ---------- |
-| mfa_amr_claims_session_id_fkey | FOREIGN KEY | FOREIGN KEY (session_id) REFERENCES auth.sessions(id) ON DELETE CASCADE |
-| mfa_amr_claims_session_id_authentication_method_pkey | UNIQUE | UNIQUE (session_id, authentication_method) |
 | amr_id_pk | PRIMARY KEY | PRIMARY KEY (id) |
+| mfa_amr_claims_session_id_authentication_method_pkey | UNIQUE | UNIQUE (session_id, authentication_method) |
+| mfa_amr_claims_session_id_fkey | FOREIGN KEY | FOREIGN KEY (session_id) REFERENCES auth.sessions(id) ON DELETE CASCADE |
 
 ## Indexes
 
 | Name | Definition |
 | ---- | ---------- |
-| mfa_amr_claims_session_id_authentication_method_pkey | CREATE UNIQUE INDEX mfa_amr_claims_session_id_authentication_method_pkey ON auth.mfa_amr_claims USING btree (session_id, authentication_method) |
 | amr_id_pk | CREATE UNIQUE INDEX amr_id_pk ON auth.mfa_amr_claims USING btree (id) |
+| mfa_amr_claims_session_id_authentication_method_pkey | CREATE UNIQUE INDEX mfa_amr_claims_session_id_authentication_method_pkey ON auth.mfa_amr_claims USING btree (session_id, authentication_method) |
 
 ## Relations
 

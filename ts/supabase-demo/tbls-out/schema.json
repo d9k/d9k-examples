@@ -693,7 +693,7 @@
           "columns": [
             "email_change_confirm_status"
           ],
-          "referenced_columns": [],
+          "referenced_columns": null,
           "comment": ""
         },
         {
@@ -705,7 +705,7 @@
           "columns": [
             "id"
           ],
-          "referenced_columns": [],
+          "referenced_columns": null,
           "comment": ""
         },
         {
@@ -717,7 +717,7 @@
           "columns": [
             "phone"
           ],
-          "referenced_columns": [],
+          "referenced_columns": null,
           "comment": ""
         }
       ],
@@ -876,7 +876,7 @@
           "columns": [
             "id"
           ],
-          "referenced_columns": [],
+          "referenced_columns": null,
           "comment": ""
         },
         {
@@ -888,7 +888,7 @@
           "columns": [
             "token"
           ],
-          "referenced_columns": [],
+          "referenced_columns": null,
           "comment": ""
         },
         {
@@ -971,7 +971,7 @@
           "columns": [
             "id"
           ],
-          "referenced_columns": [],
+          "referenced_columns": null,
           "comment": ""
         }
       ],
@@ -1049,7 +1049,7 @@
           "columns": [
             "id"
           ],
-          "referenced_columns": [],
+          "referenced_columns": null,
           "comment": ""
         }
       ],
@@ -1090,7 +1090,7 @@
           "columns": [
             "version"
           ],
-          "referenced_columns": [],
+          "referenced_columns": null,
           "comment": ""
         }
       ],
@@ -1203,7 +1203,7 @@
           "columns": [
             "id"
           ],
-          "referenced_columns": [],
+          "referenced_columns": null,
           "comment": ""
         }
       ],
@@ -1348,7 +1348,7 @@
           "columns": [
             "id"
           ],
-          "referenced_columns": [],
+          "referenced_columns": null,
           "comment": ""
         }
       ],
@@ -1425,7 +1425,7 @@
           "columns": [
             "id"
           ],
-          "referenced_columns": [],
+          "referenced_columns": null,
           "comment": ""
         },
         {
@@ -1437,7 +1437,7 @@
           "columns": [
             "name"
           ],
-          "referenced_columns": [],
+          "referenced_columns": null,
           "comment": ""
         }
       ],
@@ -1607,7 +1607,7 @@
           "columns": [
             "key_context"
           ],
-          "referenced_columns": [],
+          "referenced_columns": null,
           "comment": ""
         },
         {
@@ -1622,7 +1622,7 @@
             "key_context",
             "raw_key"
           ],
-          "referenced_columns": [],
+          "referenced_columns": null,
           "comment": ""
         },
         {
@@ -1648,7 +1648,7 @@
           "columns": [
             "id"
           ],
-          "referenced_columns": [],
+          "referenced_columns": null,
           "comment": ""
         },
         {
@@ -1660,7 +1660,7 @@
           "columns": [
             "name"
           ],
-          "referenced_columns": [],
+          "referenced_columns": null,
           "comment": ""
         }
       ],
@@ -2141,7 +2141,7 @@
           "columns": [
             "id"
           ],
-          "referenced_columns": [],
+          "referenced_columns": null,
           "comment": ""
         }
       ],
@@ -2349,7 +2349,7 @@
             "id",
             "provider"
           ],
-          "referenced_columns": [],
+          "referenced_columns": null,
           "comment": ""
         }
       ],
@@ -2474,7 +2474,7 @@
           "columns": [
             "id"
           ],
-          "referenced_columns": [],
+          "referenced_columns": null,
           "comment": ""
         }
       ],
@@ -2607,7 +2607,7 @@
           "columns": [
             "id"
           ],
-          "referenced_columns": [],
+          "referenced_columns": null,
           "comment": ""
         }
       ],
@@ -2699,7 +2699,7 @@
           "columns": [
             "id"
           ],
-          "referenced_columns": [],
+          "referenced_columns": null,
           "comment": ""
         }
       ],
@@ -2793,7 +2793,7 @@
             "session_id",
             "authentication_method"
           ],
-          "referenced_columns": [],
+          "referenced_columns": null,
           "comment": ""
         },
         {
@@ -2805,7 +2805,7 @@
           "columns": [
             "id"
           ],
-          "referenced_columns": [],
+          "referenced_columns": null,
           "comment": ""
         }
       ],
@@ -2876,7 +2876,7 @@
           "columns": [
             "resource_id"
           ],
-          "referenced_columns": [],
+          "referenced_columns": null,
           "comment": ""
         },
         {
@@ -2888,7 +2888,7 @@
           "columns": [
             "id"
           ],
-          "referenced_columns": [],
+          "referenced_columns": null,
           "comment": ""
         }
       ],
@@ -2975,7 +2975,7 @@
           "columns": [
             "domain"
           ],
-          "referenced_columns": [],
+          "referenced_columns": null,
           "comment": ""
         },
         {
@@ -3001,7 +3001,7 @@
           "columns": [
             "id"
           ],
-          "referenced_columns": [],
+          "referenced_columns": null,
           "comment": ""
         }
       ],
@@ -3109,7 +3109,7 @@
           "columns": [
             "entity_id"
           ],
-          "referenced_columns": [],
+          "referenced_columns": null,
           "comment": ""
         },
         {
@@ -3121,7 +3121,7 @@
           "columns": [
             "metadata_url"
           ],
-          "referenced_columns": [],
+          "referenced_columns": null,
           "comment": ""
         },
         {
@@ -3133,7 +3133,7 @@
           "columns": [
             "metadata_xml"
           ],
-          "referenced_columns": [],
+          "referenced_columns": null,
           "comment": ""
         },
         {
@@ -3159,7 +3159,7 @@
           "columns": [
             "id"
           ],
-          "referenced_columns": [],
+          "referenced_columns": null,
           "comment": ""
         },
         {
@@ -3171,7 +3171,7 @@
           "columns": [
             "entity_id"
           ],
-          "referenced_columns": [],
+          "referenced_columns": null,
           "comment": ""
         }
       ],
@@ -3295,7 +3295,7 @@
           "columns": [
             "request_id"
           ],
-          "referenced_columns": [],
+          "referenced_columns": null,
           "comment": ""
         },
         {
@@ -3321,7 +3321,7 @@
           "columns": [
             "id"
           ],
-          "referenced_columns": [],
+          "referenced_columns": null,
           "comment": ""
         },
         {
@@ -3474,7 +3474,7 @@
           "columns": [
             "id"
           ],
-          "referenced_columns": [],
+          "referenced_columns": null,
           "comment": ""
         }
       ],
@@ -3522,7 +3522,7 @@
           "columns": [
             "id"
           ],
-          "referenced_columns": [],
+          "referenced_columns": null,
           "comment": ""
         }
       ],
@@ -3577,7 +3577,7 @@
           "columns": [
             "id"
           ],
-          "referenced_columns": [],
+          "referenced_columns": null,
           "comment": ""
         }
       ],
@@ -3625,7 +3625,7 @@
           "columns": [
             "id"
           ],
-          "referenced_columns": [],
+          "referenced_columns": null,
           "comment": ""
         }
       ],
@@ -3673,7 +3673,7 @@
           "columns": [
             "id"
           ],
-          "referenced_columns": [],
+          "referenced_columns": null,
           "comment": ""
         }
       ],
@@ -3751,7 +3751,7 @@
             "sportman_id",
             "team_id"
           ],
-          "referenced_columns": [],
+          "referenced_columns": null,
           "comment": ""
         }
       ],
@@ -3806,7 +3806,7 @@
           "columns": [
             "version"
           ],
-          "referenced_columns": [],
+          "referenced_columns": null,
           "comment": ""
         }
       ],
@@ -3891,7 +3891,7 @@
           "columns": [
             "username"
           ],
-          "referenced_columns": [],
+          "referenced_columns": null,
           "comment": ""
         },
         {
@@ -3917,7 +3917,7 @@
           "columns": [
             "id"
           ],
-          "referenced_columns": [],
+          "referenced_columns": null,
           "comment": ""
         },
         {
@@ -3929,7 +3929,7 @@
           "columns": [
             "username"
           ],
-          "referenced_columns": [],
+          "referenced_columns": null,
           "comment": ""
         }
       ],

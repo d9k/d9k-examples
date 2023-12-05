@@ -31,9 +31,9 @@ Auth: Store of tokens used to refresh JWT tokens once they expire.
 | Name | Definition |
 | ---- | ---------- |
 | refresh_tokens_pkey | CREATE UNIQUE INDEX refresh_tokens_pkey ON auth.refresh_tokens USING btree (id) |
+| refresh_tokens_token_unique | CREATE UNIQUE INDEX refresh_tokens_token_unique ON auth.refresh_tokens USING btree (token) |
 | refresh_tokens_instance_id_idx | CREATE INDEX refresh_tokens_instance_id_idx ON auth.refresh_tokens USING btree (instance_id) |
 | refresh_tokens_instance_id_user_id_idx | CREATE INDEX refresh_tokens_instance_id_user_id_idx ON auth.refresh_tokens USING btree (instance_id, user_id) |
-| refresh_tokens_token_unique | CREATE UNIQUE INDEX refresh_tokens_token_unique ON auth.refresh_tokens USING btree (token) |
 | refresh_tokens_parent_idx | CREATE INDEX refresh_tokens_parent_idx ON auth.refresh_tokens USING btree (parent) |
 | refresh_tokens_session_id_revoked_idx | CREATE INDEX refresh_tokens_session_id_revoked_idx ON auth.refresh_tokens USING btree (session_id, revoked) |
 | refresh_tokens_updated_at_idx | CREATE INDEX refresh_tokens_updated_at_idx ON auth.refresh_tokens USING btree (updated_at DESC) |

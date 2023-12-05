@@ -23,18 +23,18 @@ Auth: Contains SAML Relay State information for each Service Provider initiated 
 | Name | Type | Definition |
 | ---- | ---- | ---------- |
 | request_id not empty | CHECK | CHECK ((char_length(request_id) > 0)) |
-| saml_relay_states_sso_provider_id_fkey | FOREIGN KEY | FOREIGN KEY (sso_provider_id) REFERENCES auth.sso_providers(id) ON DELETE CASCADE |
-| saml_relay_states_pkey | PRIMARY KEY | PRIMARY KEY (id) |
 | saml_relay_states_flow_state_id_fkey | FOREIGN KEY | FOREIGN KEY (flow_state_id) REFERENCES auth.flow_state(id) ON DELETE CASCADE |
+| saml_relay_states_pkey | PRIMARY KEY | PRIMARY KEY (id) |
+| saml_relay_states_sso_provider_id_fkey | FOREIGN KEY | FOREIGN KEY (sso_provider_id) REFERENCES auth.sso_providers(id) ON DELETE CASCADE |
 
 ## Indexes
 
 | Name | Definition |
 | ---- | ---------- |
 | saml_relay_states_pkey | CREATE UNIQUE INDEX saml_relay_states_pkey ON auth.saml_relay_states USING btree (id) |
-| saml_relay_states_sso_provider_id_idx | CREATE INDEX saml_relay_states_sso_provider_id_idx ON auth.saml_relay_states USING btree (sso_provider_id) |
-| saml_relay_states_for_email_idx | CREATE INDEX saml_relay_states_for_email_idx ON auth.saml_relay_states USING btree (for_email) |
 | saml_relay_states_created_at_idx | CREATE INDEX saml_relay_states_created_at_idx ON auth.saml_relay_states USING btree (created_at DESC) |
+| saml_relay_states_for_email_idx | CREATE INDEX saml_relay_states_for_email_idx ON auth.saml_relay_states USING btree (for_email) |
+| saml_relay_states_sso_provider_id_idx | CREATE INDEX saml_relay_states_sso_provider_id_idx ON auth.saml_relay_states USING btree (sso_provider_id) |
 
 ## Relations
 

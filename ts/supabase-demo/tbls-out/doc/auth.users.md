@@ -9,7 +9,7 @@ Auth: Stores user login data within a secure schema.
 | Name | Type | Default | Nullable | Extra Definition | Children | Parents | Comment |
 | ---- | ---- | ------- | -------- | ---------------- | -------- | ------- | ------- |
 | instance_id | uuid |  | true |  |  |  |  |
-| id | uuid |  | false |  | [auth.identities](auth.identities.md) [auth.sessions](auth.sessions.md) [auth.mfa_factors](auth.mfa_factors.md) [public.profiles](public.profiles.md) |  |  |
+| id | uuid |  | false |  | [auth.identities](auth.identities.md) [auth.mfa_factors](auth.mfa_factors.md) [auth.sessions](auth.sessions.md) [public.profiles](public.profiles.md) |  |  |
 | aud | varchar(255) |  | true |  |  |  |  |
 | role | varchar(255) |  | true |  |  |  |  |
 | email | varchar(255) |  | true |  |  |  |  |
@@ -48,23 +48,23 @@ Auth: Stores user login data within a secure schema.
 | Name | Type | Definition |
 | ---- | ---- | ---------- |
 | users_email_change_confirm_status_check | CHECK | CHECK (((email_change_confirm_status >= 0) AND (email_change_confirm_status <= 2))) |
-| users_pkey | PRIMARY KEY | PRIMARY KEY (id) |
 | users_phone_key | UNIQUE | UNIQUE (phone) |
+| users_pkey | PRIMARY KEY | PRIMARY KEY (id) |
 
 ## Indexes
 
 | Name | Definition | Comment |
 | ---- | ---------- | ------- |
+| users_phone_key | CREATE UNIQUE INDEX users_phone_key ON auth.users USING btree (phone) |  |
 | users_pkey | CREATE UNIQUE INDEX users_pkey ON auth.users USING btree (id) |  |
-| users_instance_id_idx | CREATE INDEX users_instance_id_idx ON auth.users USING btree (instance_id) |  |
-| users_instance_id_email_idx | CREATE INDEX users_instance_id_email_idx ON auth.users USING btree (instance_id, lower((email)::text)) |  |
 | confirmation_token_idx | CREATE UNIQUE INDEX confirmation_token_idx ON auth.users USING btree (confirmation_token) WHERE ((confirmation_token)::text !~ '^[0-9 ]*$'::text) |  |
-| recovery_token_idx | CREATE UNIQUE INDEX recovery_token_idx ON auth.users USING btree (recovery_token) WHERE ((recovery_token)::text !~ '^[0-9 ]*$'::text) |  |
 | email_change_token_current_idx | CREATE UNIQUE INDEX email_change_token_current_idx ON auth.users USING btree (email_change_token_current) WHERE ((email_change_token_current)::text !~ '^[0-9 ]*$'::text) |  |
 | email_change_token_new_idx | CREATE UNIQUE INDEX email_change_token_new_idx ON auth.users USING btree (email_change_token_new) WHERE ((email_change_token_new)::text !~ '^[0-9 ]*$'::text) |  |
 | reauthentication_token_idx | CREATE UNIQUE INDEX reauthentication_token_idx ON auth.users USING btree (reauthentication_token) WHERE ((reauthentication_token)::text !~ '^[0-9 ]*$'::text) |  |
+| recovery_token_idx | CREATE UNIQUE INDEX recovery_token_idx ON auth.users USING btree (recovery_token) WHERE ((recovery_token)::text !~ '^[0-9 ]*$'::text) |  |
 | users_email_partial_key | CREATE UNIQUE INDEX users_email_partial_key ON auth.users USING btree (email) WHERE (is_sso_user = false) | Auth: A partial unique index that applies only when is_sso_user is false |
-| users_phone_key | CREATE UNIQUE INDEX users_phone_key ON auth.users USING btree (phone) |  |
+| users_instance_id_email_idx | CREATE INDEX users_instance_id_email_idx ON auth.users USING btree (instance_id, lower((email)::text)) |  |
+| users_instance_id_idx | CREATE INDEX users_instance_id_idx ON auth.users USING btree (instance_id) |  |
 
 ## Triggers
 
