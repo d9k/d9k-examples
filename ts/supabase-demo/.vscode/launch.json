@@ -2,43 +2,7 @@
   "version": "0.2.0",
   "configurations": [
     {
-        "name": "parse with babel: debug",
-        "type": "node",
-        "request": "launch",
-        "runtimeExecutable": "node",
-        "runtimeArgs": ["--nolazy", "-r", "ts-node/register/transpile-only"],
-
-        // "args": ["src/script.ts", "--example", "hello"],
-        "args": ["parse-supabase-generated-types-with-babel.ts"],
-
-        "cwd": "${workspaceRoot}",
-        "internalConsoleOptions": "openOnSessionStart",
-        "skipFiles": ["<node_internals>/**", "node_modules/**"]
-    },
-    {
-        "name": "parse with babel: debug 2",
-        "type": "node",
-        "request": "launch",
-        "skipFiles": [
-          "<node_internals>/**",
-          "node_modules/**",
-        ],
-        "cwd": "${workspaceRoot}",
-        "internalConsoleOptions": "openOnSessionStart",
-        "env": {
-          "LOCAL_MODE": "true",
-        },
-        "args": [
-          "node_modules/ts-node/dist/bin.js",
-          "parse-supabase-generated-types-with-babel.ts",
-        ],
-        "runtimeArgs": [
-          "--unhandled-rejections=strict",
-          "--nolazy",
-        ],
-    },
-    {
-      "name": "parse with babel: debug 3",
+      "name": "parse with babel: debug",
       "type": "node",
       "request": "launch",
       "skipFiles": [
@@ -59,6 +23,6 @@
         "--unhandled-rejections=strict",
         "--nolazy",
       ],
-  }
+    }
   ]
 }
