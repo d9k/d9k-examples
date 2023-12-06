@@ -1,5 +1,8 @@
-/** https://github.com/babel/babel/discussions/14578#discussioncomment-2810253 */
-// TODO
+/**
+ * See also
+ * - [Babel plugin handbook](https://github.com/jamiebuilds/babel-handbook/blob/master/translations/en/plugin-handbook.md#traversal))
+ * - [Feature: supabase gen schema json · Issue #1715 · supabase/cli](https://github.com/supabase/cli/issues/1715#issuecomment-1841671620)
+ */
 import * as fs from 'fs';
 import { TSPropertySignature } from '@babel/types';
 import { parse } from '@babel/parser';
