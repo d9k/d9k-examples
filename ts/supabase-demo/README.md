@@ -37,12 +37,31 @@ pnpm exec supabase link --project-ref=<Reference_ID>
 ### Generate typescript types
 
 ```bash
+pnpm run gen-typescript-types
+```
+
+which executes
+
+```bash
 pnpm exec supabase gen types typescript --linked > src/db/supabase-types-generated.ts
 ```
 
 See
 
-## Generate schema
+## Generate JSON schema
+
+```bash
+pnpm run parse-supabase-generated-types-with-babel
+```
+
+## Generate JSON schema: deprecated
+
+Deprecated because `pg-structure` which is used `pg-tables-to-jsonschema` stopped to work with PostgreSQL connection to Supabase for unknown reason with error
+
+```
+TypeError: Cannot read properties of undefined (reading 'table')
+    at ForeignKey.get referencedTable (node_modules/pg-structure/src/pg-structure/constraint/foreign-key.ts:80:23)
+```
 
 Copy `.env.template` to `.env`. Fill envirorment variables values.
 

@@ -1,7 +1,7 @@
 {
 	"scripts": {
 		"gen-typescript-types": "supabase gen types typescript --linked > src/db/types.generated.ts",
-		"gen-json-schema": "tsx gen-json-schema.ts",
+		"deprecated-gen-json-schema": "tsx deprecated-gen-json-schema.ts",
 		"deprecated-parse-supabase-generated-types-with-typescript-parser": "tsx deprecated-parse-supabase-generated-types-with-typescript-parser.ts",
 		"parse-supabase-generated-types-with-babel": "tsx parse-supabase-generated-types-with-babel.ts",
 		"tbls": "tsx tbls.ts"
