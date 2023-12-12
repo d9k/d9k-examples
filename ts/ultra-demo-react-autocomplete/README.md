@@ -1,6 +1,7 @@
 # ultra-demo-react-autocomplete
 
-TODO [src/app.tsx](./src/app.tsx):
+TODO Using [VSCode Deno plugin](https://github.com/denoland/vscode_deno) at
+[src/app.tsx](./src/app.tsx):
 
 1. no autocomplete for imports from `react`
 2. `Go to definition` command doesn't work for `useEffect`, `useEffect`.
