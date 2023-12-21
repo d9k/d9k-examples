@@ -1,0 +1,27 @@
+
+--
+-- Data for Name: countries; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+INSERT INTO "public"."countries" ("id", "name", "created_at", "updated_at", "found_year", "next_rename_year", "created_by", "updated_by") VALUES
+	(1, 'Greece 1', '2023-11-28 06:50:37.146622+00', '2023-11-28 06:50:37.146622+00', -4000, 100, NULL, NULL),
+	(2, 'Greece', '2023-12-19 21:09:32.167558+00', '2023-12-19 21:09:32.167558+00', -4005, 100, NULL, NULL),
+	(7, 'Arztocka', '2023-12-20 15:31:38.442098+00', '2023-12-20 15:45:21.578367+00', NULL, NULL, 1, 1);
+
+
+--
+-- Data for Name: audit_log_entries; Type: TABLE DATA; Schema: auth; Owner: supabase_auth_admin
+--
+
+
+
+
+
+--
+-- Data for Name: identities; Type: TABLE DATA; Schema: auth; Owner: supabase_auth_admin
+--
+
+INSERT INTO "auth"."identities" ("provider_id", "user_id", "identity_data", "provider", "last_sign_in_at", "created_at", "updated_at", "id") VALUES
+	('b5f563a3-b794-49d0-a0e3-dbf9fffd2321', 'b5f563a3-b794-49d0-a0e3-dbf9fffd2321', '{"sub": "b5f563a3-b794-49d0-a0e3-dbf9fffd2321", "email": "d9k@ya.ru", "email_verified": false, "phone_verified": false}', 'email', '2023-11-30 13:19:57.231649+00', '2023-11-30 13:19:57.231688+00', '2023-11-30 13:19:57.231688+00', 'ef9a09b6-d37c-4ba9-a4d4-0682d78af774'),
+	('727a5d27-4b66-49ea-a2c1-0bccc7b8e2cd', '727a5d27-4b66-49ea-a2c1-0bccc7b8e2cd', '{"sub": "727a5d27-4b66-49ea-a2c1-0bccc7b8e2cd", "email": "d9k@ya.tu", "email_verified": false, "phone_verified": false}', 'email', '2023-12-11 20:49:26.154423+00', '2023-12-11 20:49:26.154477+00', '2023-12-11 20:49:26.154477+00', 'c8974ccd-72ab-40e3-ac96-5997a55d45e5');
+
