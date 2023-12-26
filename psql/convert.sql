@@ -1,3 +1,4 @@
+-- Boolean:
 SELECT
   NULL::varchar::boolean as _null,
   '1'::jsonb::varchar::boolean as _json_1,
