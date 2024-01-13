@@ -13,7 +13,7 @@ CREATE TABLE IF NOT EXISTS demo_entities (
 -- (100, 'banana', 100, NOW()),
 -- (200, 'manana', 200, NOW());
 
-ALTER TABLE demo_packages INHERIT demo_entities;
+-- ALTER TABLE demo_packages INHERIT demo_entities;
 
 -- won't allow
 -- ALTER TABLE demo_packages DROP COLUMN created_at;
@@ -31,4 +31,17 @@ ALTER TABLE demo_packages INHERIT demo_entities;
 -- ALTER TABLE demo_packages INHERIT demo_entities;
 
 -- UPDATE demo_packages SET created_at = _created_at;
-ALTER TABLE demo_packages DROP COLUMN _created_at;
+-- ALTER TABLE demo_packages DROP COLUMN _created_at;
+
+-- ALTER TABLE demo_entities ADD COLUMN updated_at TIMESTAMPTZ;
+-- ALTER TABLE demo_entities DROP COLUMN updated_at;
+
+-- ALTER TABLE demo_packages ADD COLUMN updated_at TIMESTAMPTZ;
+-- ALTER TABLE demo_entities ADD COLUMN updated_at TIMESTAMPTZ;
+
+-- ALTER TABLE demo_entities ADD COLUMN id INT;
+
+-- ALTER TABLE demo_packages ADD COLUMN table_name TEXT NOT NULL DEFAULT 'demo_packages';
+-- ALTER TABLE demo_entities ADD COLUMN table_name TEXT NOT NULL;
+
+-- ALTER TABLE demo_entities ADD PRIMARY KEY (table_name, id);
