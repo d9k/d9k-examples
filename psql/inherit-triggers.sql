@@ -11,7 +11,7 @@ BEGIN
 END;
 $$;
 
--- NOT FIRED on demo_packages edit!
+-- -- NOT FIRED on demo_packages edit!
 -- CREATE TRIGGER on_demo_entity_edit
 --   BEFORE UPDATE
 --   ON public.demo_entities
