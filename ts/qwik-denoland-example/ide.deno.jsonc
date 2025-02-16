@@ -1,0 +1,10 @@
+{
+    "compilerOptions": {
+        "lib": [
+            "deno.window"
+        ],
+        "jsx": "react-jsx",
+        "jsxImportSource": "@builder.io/qwik"
+    },
+    "importMap": "ide.importMap.json"
+}
