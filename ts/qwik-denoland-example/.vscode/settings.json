@@ -1,0 +1,5 @@
+{
+    "deno.enable": true,
+    "deno.importMap": "./importmap.ide.json",
+    "deno.unstable": ["sloppy-imports"],
+}
