@@ -1,6 +1,6 @@
 import React from 'react';
 
-export const TestUseEffectCountNoDeps: React.FC = () => {
+export const TimerNoDeps: React.FC = () => {
     const [count, setCount] = React.useState(0);
     const logPrefix = 'TestUseEffectCountNoDeps:';
 
@@ -13,5 +13,7 @@ export const TestUseEffectCountNoDeps: React.FC = () => {
 
     console.log(logPrefix, count);
 
-    return (<hl>{count}</hl>);
+    return (<h1>{count}</h1>);
 }
+
+// export default TimerNoDeps;
