@@ -1,11 +1,22 @@
 # NestJS monorepo example
 
-Created with:
+## Run
+
+```bash
+nest start --watch main-app
+```
+
+```bash
+nest start --watch second-app
+```
+
+## Created with
 
 ```bash
 nest new main-app
 mv main-app nestjs-monorepo
 cd nestjs-monorepo
+nest generate app second-app
 ```
 
 See [Workspaces - CLI | NestJS - A progressive Node.js framework](https://docs.nestjs.com/cli/monorepo)
