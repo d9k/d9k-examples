@@ -14,9 +14,11 @@ describe('SecondAppController', () => {
     secondAppController = app.get<SecondAppController>(SecondAppController);
   });
 
-  describe('root', () => {
+  describe('second-app root', () => {
     it('should return "Hello World!"', () => {
-      expect(secondAppController.getHello()).toBe('Hello World!');
+      expect(secondAppController.getHello()).toBe(
+        'Hello World from second app!',
+      );
     });
   });
 });
