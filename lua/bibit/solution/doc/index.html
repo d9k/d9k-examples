@@ -1,0 +1,287 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<head>
+    <title>Reference</title>
+    <link rel="stylesheet" href="ldoc.css" type="text/css" />
+</head>
+<body>
+
+<div id="container">
+
+<div id="product">
+	<div id="product_logo"></div>
+	<div id="product_name"><big><b></b></big></div>
+	<div id="product_description"></div>
+</div> <!-- id="product" -->
+
+
+<div id="main">
+
+
+<!-- Menu -->
+
+<div id="navigation">
+<br/>
+<h1>ldoc</h1>
+
+
+<h2>Contents</h2>
+<ul>
+<li><a href="#Functions">Functions</a></li>
+</ul>
+
+
+<h2>Modules</h2>
+<ul class="nowrap">
+  <li><strong>bibit.lib</strong></li>
+</ul>
+
+</div>
+
+<div id="content">
+
+<h1>Module <code>bibit.lib</code></h1>
+<p>see related module tests at test-lib.lua</p>
+<p>
+
+</p>
+
+
+<h2><a href="#Functions">Functions</a></h2>
+<table class="function_list">
+	<tr>
+	<td class="name" nowrap><a href="#print_r">print_r (t)</a></td>
+	<td class="summary">for debug output
+ (got from this <a href="https://coronalabs.com/blog/2014/09/02/tutorial-printing-table-contents">tutorial at coronalabs</a>)</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#to_binary">to_binary (number)</a></td>
+	<td class="summary">with help of <a href="http://stackoverflow.com/questions/9079853/lua-print-integer-as-a-binary">stackoverflow: print integer as binary</a></td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#to_triangle">to_triangle (binary_array)</a></td>
+	<td class="summary">Converts binary array to triangle table.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#triangle_get_el">triangle_get_el (triangle, y, x)</a></td>
+	<td class="summary">get element from triangle with <code>x</code> coordinate transformation</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#to_pyramid_tree">to_pyramid_tree (triangle, top_x, top_y, bottom_y)</a></td>
+	<td class="summary">Function converts triangle table to pyramid table.</td>
+	</tr>
+</table>
+
+<br/>
+<br/>
+
+
+    <h2 class="section-header "><a name="Functions"></a>Functions</h2>
+
+    <dl class="function">
+    <dt>
+    <a name = "print_r"></a>
+    <strong>print_r (t)</strong>
+    </dt>
+    <dd>
+    for debug output
+ (got from this <a href="https://coronalabs.com/blog/2014/09/02/tutorial-printing-table-contents">tutorial at coronalabs</a>)
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">t</span>
+            <span class="types"><span class="type">any</span></span>
+         any object
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "to_binary"></a>
+    <strong>to_binary (number)</strong>
+    </dt>
+    <dd>
+    with help of <a href="http://stackoverflow.com/questions/9079853/lua-print-integer-as-a-binary">stackoverflow: print integer as binary</a>
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">number</span>
+            <span class="types"><span class="type">int</span></span>
+          input
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+           <span class="types"><span class="type">{int,...}</span></span>
+        table of integers (0 or 1 each)
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "to_triangle"></a>
+    <strong>to_triangle (binary_array)</strong>
+    </dt>
+    <dd>
+
+<p>Converts binary array to triangle table.  First row of resulting table has one int element.
+ Each subsequent row has elements quantity bigger by 2.</p>
+
+<pre><code>        ^                              ^
+       / \                            / \
+      /   \                          /   \
+     / 0,1 \                        / 1,1 \
+    *-------*      -------&gt;        *-------*
+   / \ 0,2 / \                    / \ 2,2 / \
+  /   \   /   \                  /   \   /   \
+ /-1,2 \ / 1,2 \                / 1,2 \ / 3,2 \
+*-------*-------*              *-------*-------*
+</code></pre>
+
+
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">binary_array</span>
+            <span class="types"><span class="type">{int,...}</span></span>
+
+
+
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+           <span class="types"><span class="type">{{int,...},...}</span></span>
+        table of tables of int. Inner tables are triangle's rows
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "triangle_get_el"></a>
+    <strong>triangle_get_el (triangle, y, x)</strong>
+    </dt>
+    <dd>
+    get element from triangle with <code>x</code> coordinate transformation
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">triangle</span>
+            <span class="types"><span class="type">{{int,...},...}</span></span>
+
+
+
+        </li>
+        <li><span class="parameter">y</span>
+            <span class="types"><span class="type">int</span></span>
+         is just a row number
+        </li>
+        <li><span class="parameter">x</span>
+            <span class="types"><span class="type">int</span></span>
+         is x coordinate. first row has <code>[0: 0]</code> available <code>x</code> coordinates, second <code>[-1; 1]</code>, third <code>[-2; 2]</code> and so on
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+           <span class="types"><span class="type">int</span></span>
+        requested triangle element
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "to_pyramid_tree"></a>
+    <strong>to_pyramid_tree (triangle, top_x, top_y, bottom_y)</strong>
+    </dt>
+    <dd>
+    Function converts triangle table to pyramid table.  Each pyramid tree level has 4 children elements:</p>
+
+<pre><code>    ^
+   /1\      &lt;-- first row
+  *---*
+ /2\3/4\    &lt;-- second row
+*---*---*
+</code></pre>
+
+<p> If triangle is inverted (<code>top_y &gt; bottom_y</code>; <code>y</code> axis goes from top to bottom):</p>
+
+<pre><code>*---*---*
+ \2/3\4/    &lt;-- second row
+  *---*
+   \1/      &lt;-- first row
+    *
+</code></pre>
+
+
+<p> x coordinate: <code>[-(line_num-1); line_num-1]</code>, where line_num is <code>y</code>. See coords.svg, divide.svg for explanation
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">triangle</span>
+            <span class="types"><span class="type">{{int,...},...}</span></span>
+         big triangle table consisted of rows of integer
+        </li>
+        <li><span class="parameter">top_x</span>
+            <span class="types"><span class="type">int</span></span>
+
+
+
+        </li>
+        <li><span class="parameter">top_y</span>
+            <span class="types"><span class="type">int</span></span>
+         <code>&gt;= 1</code> and <code>&lt;= triangle height</code>
+        </li>
+        <li><span class="parameter">bottom_y</span>
+            <span class="types"><span class="type">int</span></span>
+         can be <code>&lt; top_x</code> so triangle would be inverted
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+           <span class="types"><span class="type">{{int</span>, <a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.4">string</a> or <a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.5">table,...},...}</a></span>
+
+
+
+    </ol>
+
+
+
+
+</dd>
+</dl>
+
+
+</div> <!-- id="content" -->
+</div> <!-- id="main" -->
+<div id="about">
+<i>generated by <a href="http://github.com/stevedonovan/LDoc">LDoc 1.4.6</a></i>
+<i style="float:right;">Last updated 2017-04-26 14:02:13 </i>
+</div> <!-- id="about" -->
+</div> <!-- id="container" -->
+</body>
+</html>
