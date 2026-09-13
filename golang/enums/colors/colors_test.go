@@ -9,10 +9,30 @@ func TestConstructorIDs(t *testing.T) {
 		wantID   int
 		wantName string
 	}{
-		{"Unknown", Unknown(), 0, "Unknown"},
-		{"Red", Red(), 1, "Red"},
-		{"Green", Green(), 2, "Green"},
-		{"Blue", Blue(), 3, "Blue"},
+		{
+			name:     "Unknown",
+			got:      Unknown(),
+			wantID:   0,
+			wantName: "Unknown",
+		},
+		{
+			name:     "Red",
+			got:      Red(),
+			wantID:   1,
+			wantName: "Red",
+		},
+		{
+			name:     "Green",
+			got:      Green(),
+			wantID:   2,
+			wantName: "Green",
+		},
+		{
+			name:     "Blue",
+			got:      Blue(),
+			wantID:   3,
+			wantName: "Blue",
+		},
 	}
 
 	for _, tt := range tests {
@@ -45,12 +65,42 @@ func TestEquals(t *testing.T) {
 		b    Color
 		want bool
 	}{
-		{"Red equals Red", Red(), Red(), true},
-		{"Green equals Green", Green(), Green(), true},
-		{"Unknown equals Unknown", Unknown(), Unknown(), true},
-		{"Red not equals Blue", Red(), Blue(), false},
-		{"Red not equals Unknown", Red(), Unknown(), false},
-		{"Blue not equals Green", Blue(), Green(), false},
+		{
+			name: "Red equals Red",
+			a:    Red(),
+			b:    Red(),
+			want: true,
+		},
+		{
+			name: "Green equals Green",
+			a:    Green(),
+			b:    Green(),
+			want: true,
+		},
+		{
+			name: "Unknown equals Unknown",
+			a:    Unknown(),
+			b:    Unknown(),
+			want: true,
+		},
+		{
+			name: "Red not equals Blue",
+			a:    Red(),
+			b:    Blue(),
+			want: false,
+		},
+		{
+			name: "Red not equals Unknown",
+			a:    Red(),
+			b:    Unknown(),
+			want: false,
+		},
+		{
+			name: "Blue not equals Green",
+			a:    Blue(),
+			b:    Green(),
+			want: false,
+		},
 	}
 
 	for _, tt := range tests {
