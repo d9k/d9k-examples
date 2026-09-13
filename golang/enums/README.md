@@ -28,6 +28,24 @@ Red().Equals(Red())   = true
 Red().Equals(Blue())  = false
 ```
 
+## Testing
+
+```bash
+cd enums
+go test ./...
+```
+
+Run with verbose output:
+
+```bash
+cd enums
+go test ./... -v
+```
+
+The tests in [`colors/colors_test.go`](colors/colors_test.go) cover the constructor
+functions (`ID()`/`Name()`), the zero value being `Unknown`, `Equals()` behavior
+(reflexive cases, mismatches, symmetry), and name uniqueness across values.
+
 ## Verification
 
 ```bash
@@ -40,8 +58,9 @@ go build ./...
 
 ```
 enums/
-├── go.mod            # standalone enums module
-├── main.go           # main package: demo of using colors.Color
+├── go.mod                # standalone enums module
+├── main.go               # main package: demo of using colors.Color
 └── colors/
-    └── colors.go     # colors package: enum emulation
+    ├── colors.go         # colors package: enum emulation
+    └── colors_test.go    # unit tests for the colors package
 ```
