@@ -10,28 +10,21 @@ import (
 const maxFactorialArg = 20
 
 // factorial computes n! under a contract: 0 <= n <= 20.
-// It demonstrates both check semantics:
-//   - a failing check with a custom error -> the custom error is used;
-//   - a failing check with ok=false and err=nil -> ErrDefault is generated.
+// Checks are compact Pre/Post pairs returning (ok, err):
+//   - failing check with an error  -> the custom error is reported;
+//   - failing check with err=nil   -> ErrDefault is generated.
 func factorial(n int) (int64, error) {
 	return DoContract(Spec[int64]{
 		PreConditions: []PreCheck{
-			{
-				Label: "input is non-negative",
-				Fn: func() (bool, error) {
-					if n < 0 {
-						return false, errors.New("n must be >= 0")
-					}
-					return true, nil
-				},
-			},
-			{
-				Label: "input fits int64",
-				Fn: func() (bool, error) {
-					// ok=false with nil error -> default error
-					return n <= maxFactorialArg, nil
-				},
-			},
+			Pre("input is non-negative", func() (bool, error) {
+				if n < 0 {
+					return false, errors.New("n must be >= 0")
+				}
+				return true, nil
+			}),
+			Pre("input fits int64", func() (bool, error) {
+				return n <= maxFactorialArg, nil // ok=false with nil error -> default error
+			}),
 		},
 		Process: func() (int64, error) {
 			result := int64(1)
@@ -41,23 +34,17 @@ func factorial(n int) (int64, error) {
 			return result, nil
 		},
 		PostConditions: []PostCheck[int64]{
-			{
-				Label: "result is positive",
-				Fn: func(result int64) (bool, error) {
-					return result > 0, nil
-				},
-			},
-			{
-				Label: "result divisible by every factor",
-				Fn: func(result int64) (bool, error) {
-					for i := 2; i <= n; i++ {
-						if result%int64(i) != 0 {
-							return false, errors.New("not divisible by a factor")
-						}
+			Post("result is positive", func(r int64) (bool, error) {
+				return r > 0, nil
+			}),
+			Post("result divisible by every factor", func(r int64) (bool, error) {
+				for i := 2; i <= n; i++ {
+					if r%int64(i) != 0 {
+						return false, errors.New("not divisible by a factor")
 					}
-					return true, nil
-				},
-			},
+				}
+				return true, nil
+			}),
 		},
 	})
 }
@@ -67,10 +54,10 @@ func TestFactorialSuccess(t *testing.T) {
 		n    int
 		want int64
 	}{
-		{n: 0, want: 1},
-		{n: 1, want: 1},
-		{n: 5, want: 120},
-		{n: 20, want: 2432902008176640000}, // 20!
+		{0, 1},
+		{1, 1},
+		{5, 120},
+		{20, 2432902008176640000}, // 20!
 	}
 
 	for _, tt := range tests {

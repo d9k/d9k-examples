@@ -16,16 +16,26 @@ import (
 // without providing its own error.
 var ErrDefault = errors.New("contract condition violated")
 
-// PreCheck is a named pre-condition.
+// PreCheck is a named pre-condition; build it with Pre.
 type PreCheck struct {
 	Label string
 	Fn    func() (bool, error)
 }
 
-// PostCheck is a named post-condition over the process result.
+// Pre builds a pre-condition from a compact pair (label, fn).
+func Pre(label string, fn func() (bool, error)) PreCheck {
+	return PreCheck{Label: label, Fn: fn}
+}
+
+// PostCheck is a named post-condition over the process result; build it with Post.
 type PostCheck[T any] struct {
 	Label string
 	Fn    func(T) (bool, error)
+}
+
+// Post builds a post-condition from a compact pair (label, fn).
+func Post[T any](label string, fn func(T) (bool, error)) PostCheck[T] {
+	return PostCheck[T]{Label: label, Fn: fn}
 }
 
 // Spec describes a contract: pre-conditions -> process -> post-conditions.

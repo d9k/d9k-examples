@@ -9,6 +9,14 @@ Each check returns `(ok, err)`:
 - `ok == false` and `err != nil` — the custom error is reported;
 - `ok == false` and `err == nil` — the default error `contract.ErrDefault` is generated.
 
+Checks are written compactly with `Pre`/`Post` constructors, so each entry shows
+its own kind (pre- or post-condition) and the slice order is deterministic:
+
+```go
+contract.Pre("amount is positive", func() (bool, error) { ... })
+contract.Post("balance is non-negative", func(b float64) (bool, error) { ... })
+```
+
 ## Layout
 
 ```
