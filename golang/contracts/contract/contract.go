@@ -16,35 +16,53 @@ import (
 // without providing its own error.
 var ErrDefault = errors.New("contract condition violated")
 
+// Helper function types: they name the contract concepts so that the
+// declarations below (and any user code) stay short and self-documenting.
+type (
+	// PreFn is a pre-condition check: it inspects the input / outer state.
+	PreFn func() (bool, error)
+
+	// ProcessFn is the process step of a contract; T is its result type.
+	ProcessFn[T any] func() (T, error)
+
+	// PostFn is a post-condition check over the process result.
+	PostFn[T any] func(T) (bool, error)
+)
+
 // PreCheck is a named pre-condition; build it with Pre.
 type PreCheck struct {
 	Label string
-	Fn    func() (bool, error)
+	Fn    PreFn
 }
 
 // Pre builds a pre-condition from a compact pair (label, fn).
-func Pre(label string, fn func() (bool, error)) PreCheck {
+func Pre(label string, fn PreFn) PreCheck {
 	return PreCheck{Label: label, Fn: fn}
 }
 
 // PostCheck is a named post-condition over the process result; build it with Post.
 type PostCheck[T any] struct {
 	Label string
-	Fn    func(T) (bool, error)
+	Fn    PostFn[T]
 }
 
 // Post builds a post-condition from a compact pair (label, fn).
-func Post[T any](label string, fn func(T) (bool, error)) PostCheck[T] {
+func Post[T any](label string, fn PostFn[T]) PostCheck[T] {
 	return PostCheck[T]{Label: label, Fn: fn}
 }
 
+// PreChecks is an ordered list of pre-conditions; slices keep the
+// evaluation order deterministic (unlike a map).
+type PreChecks []PreCheck
+
+// PostChecks is an ordered list of post-conditions over a result of type T.
+type PostChecks[T any] []PostCheck[T]
+
 // Spec describes a contract: pre-conditions -> process -> post-conditions.
-// T is the result type of Process.
-// Slices (not maps) guarantee deterministic evaluation order.
 type Spec[T any] struct {
-	PreConditions  []PreCheck
-	Process        func() (T, error)
-	PostConditions []PostCheck[T]
+	PreConditions  PreChecks
+	Process        ProcessFn[T]
+	PostConditions PostChecks[T]
 }
 
 // DoContract runs the contract.
@@ -52,7 +70,7 @@ type Spec[T any] struct {
 func DoContract[T any](s Spec[T]) (T, error) {
 	var zero T
 
-	// 1. Pre-conditions — check the input.
+	// 1. Pre-conditions — check the input. A nil PreConditions is a no-op.
 	for _, c := range s.PreConditions {
 		ok, err := c.Fn()
 		if !ok {
@@ -60,7 +78,7 @@ func DoContract[T any](s Spec[T]) (T, error) {
 		}
 	}
 
-	// 2. Process.
+	// 2. Process. A nil Process would panic when called; report it instead.
 	if s.Process == nil {
 		return zero, errors.New("process: missing")
 	}
@@ -69,7 +87,7 @@ func DoContract[T any](s Spec[T]) (T, error) {
 		return zero, fmt.Errorf("process: %w", err)
 	}
 
-	// 3. Post-conditions — check the output.
+	// 3. Post-conditions — check the output. A nil PostConditions is a no-op.
 	for _, c := range s.PostConditions {
 		ok, cerr := c.Fn(result)
 		if !ok {

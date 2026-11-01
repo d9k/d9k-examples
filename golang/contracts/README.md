@@ -17,6 +17,23 @@ contract.Pre("amount is positive", func() (bool, error) { ... })
 contract.Post("balance is non-negative", func(b float64) (bool, error) { ... })
 ```
 
+The example drops the `contract.` qualifier with a dot-import, so the contract
+reads as plain prose (see [`account.go`](account.go)):
+
+```go
+import . "contracts/contract"
+
+return DoContract(Spec[float64]{
+    PreConditions: PreChecks{
+        Pre("amount is positive", func() (bool, error) { ... }),
+    },
+    Process: func() (float64, error) { ... },
+    PostConditions: PostChecks[float64]{
+        Post("balance is non-negative", func(b float64) (bool, error) { ... }),
+    },
+})
+```
+
 ## Layout
 
 ```
